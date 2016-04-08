@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+
+    
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+          <h1>Ask & Answer</h1>
+          <h3 style="color:beige;">Ask your questions and answer others' too :)</h3>
+        {{pass}}
+      </div>
+    </header>
+{{end}}
+
+{{if 'message' in globals():}}
+<h2 style="text-align:center; color:red; font-weight:bold">{{=message}}</h2>
+<h3 class="lead" style="text-align:center; color:orange">{{=T("Here you can ask your questions, view others' answers to questions on different topics and even answer others' questions!!")}}</h3>
+<h3 style="text-align:center; color:orangered">{{=T("Come, join us in this unique learning experience.")}}</h3>
+{{elif 'content' in globals():}}
+{{=content}}
+{{else:}}
+{{=BEAUTIFY(response._vars)}}
+{{pass}}

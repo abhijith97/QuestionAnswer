@@ -1,0 +1,3 @@
+{{extend 'layout.html'}}
+<h1>Add a new Recipe</h1>
+{{=form}}

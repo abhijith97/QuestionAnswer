@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+<h1>Latest Questions</h1>
+{{if len(images):}}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr><th>Title</th>
+            <th>Description</th></tr>
+    {{for image in images:}}
+    <tr>
+        <td>{{=A(image.title,_href=URL("show",args=image.id))}}</td>
+        <td>{{=image.body}}</td>
+    </tr>
+    {{pass}}
+    </table>
+</div>
+        {{=backward}}
+        {{=forward}}
+        {{=nav}}
+{{else:}}
+    <h1>No Recipes uploaded yet!!</h1>
+{{pass}}

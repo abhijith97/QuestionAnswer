@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+<h1 class="page-header">Question:</h1>
+<h3>Uploaded by: {{=image.author}}</h3>
+<small>{{=image.timestamp.date()}}</small>
+
+{{if image.file:}}
+<div style="text-align:center">
+<img width="400px"
+     src="{{=URL('download', args=image.file)}}" />
+</div>
+{{pass}}
+<br>
+<div class="container">
+    <h3>Short Description: </h3>
+    <div class="jumbotron">
+        
+<h3>{{=image.body}}</h3>
+    </div>  
+</div>
+
+{{=form}}
