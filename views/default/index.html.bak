@@ -13,7 +13,7 @@
 
 {{if 'message' in globals():}}
 <h2 style="text-align:center; color:red; font-weight:bold">{{=message}}</h2>
-<h3 class="lead" style="text-align:center; color:orange">{{=T("Here you can upload your own recipe, view others' recipes and even give your comments on the recipes!!")}}</h3>
+<h3 class="lead" style="text-align:center; color:orange">{{=T("Here you can ask your questions, view others' answers to questions on different topics and even answer others' questions!!")}}</h3>
 <h3 style="text-align:center; color:orangered">{{=T("Come, join us in this unique learning experience.")}}</h3>
 {{elif 'content' in globals():}}
 {{=content}}

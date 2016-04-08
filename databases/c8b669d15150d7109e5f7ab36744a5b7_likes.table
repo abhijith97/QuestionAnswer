@@ -33,7 +33,7 @@ p15
 I00
 sS'sortable'
 p16
-I2
+I3
 sS'sql'
 p17
 S'INTEGER REFERENCES answer (id) ON DELETE CASCADE  '
@@ -53,7 +53,7 @@ I512
 sg15
 I00
 sg16
-I3
+I4
 sg17
 S'CHAR(512)'
 p24
@@ -62,7 +62,7 @@ I00
 sg20
 S'string'
 p25
-ssS'id'
+ssS'quest_id'
 p26
 (dp27
 g14
@@ -70,14 +70,14 @@ I512
 sg15
 I00
 sg16
-I1
+I2
 sg17
-S'INTEGER PRIMARY KEY AUTOINCREMENT'
+S'INTEGER REFERENCES question (id) ON DELETE CASCADE  '
 p28
 sg19
 I00
 sg20
-S'id'
+S'reference question'
 p29
 ssS'author'
 p30
@@ -102,4 +102,21 @@ sS'type'
 p38
 S'string'
 p39
+ssS'id'
+p40
+(dp41
+g14
+I512
+sg15
+I00
+sg16
+I1
+sg17
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
+p42
+sg19
+I00
+sg20
+S'id'
+p43
 ss.

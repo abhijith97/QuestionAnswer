@@ -46,6 +46,8 @@ def show():
 #     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
     return dict(image=image, commentss=commentss, form=form)
 
+
+
 @auth.requires_login()
 def uploadpage():
     form=SQLFORM(db.question)
@@ -55,7 +57,7 @@ def uploadpage():
     
     if form.process().accepted:
         response.flash="Your recipe is posted"
-        redirect(URL('default','myrecipes'))
+        redirect(URL('default','myquestions'))
     return dict(form=form)
 
 @auth.requires_login()

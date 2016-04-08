@@ -1,20 +1,34 @@
 {{extend 'layout.html'}}
 
-    
 {{block header}}
-    <header class="container-fluid background">
+    <header class="container-fluid background" style="margin:0px">
+        <br>
       <div class="jumbotron text-center">
-          <h1>Ask & Answer</h1>
-          <h3 style="color:beige;">Ask your questions and answer others' too :)</h3>
+        
+        <h1 style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;">Learn2Cook</h1><br><br>
+          <h3 style="color:white">Quick Recipes, Easy Meal Ideas!</h3>
         {{pass}}
       </div>
+        <br><br>
     </header>
 {{end}}
+<div id="one">
+    
 
 {{if 'message' in globals():}}
-<h2 style="text-align:center; color:red; font-weight:bold">{{=message}}</h2>
-<h3 class="lead" style="text-align:center; color:orange">{{=T("Here you can ask your questions, view others' answers to questions on different topics and even answer others' questions!!")}}</h3>
-<h3 style="text-align:center; color:orangered">{{=T("Come, join us in this unique learning experience.")}}</h3>
+<h2>{{=message}}</h2>
+<p class="lead">{{=T('The one-stop destination for people who love cooking!')}}</p>
+<ul>
+  <li>{{=T('Upload your recipes.')}}</li>
+    <br>
+  <li>{{=T('Learn new ones.')}}</li><br>
+  <li>{{=T('Comment')}}</li>
+    <h3>
+        
+       {{=T('And much more!')}} </h3>
+
+</ul>
+</div>
 {{elif 'content' in globals():}}
 {{=content}}
 {{else:}}

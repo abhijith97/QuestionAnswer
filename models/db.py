@@ -138,6 +138,7 @@ db.define_table('answer',
    Field('likes'))
 
 db.define_table('likes',
+                Field('quest_id','reference question'),
                Field('ans_id','reference answer'),
                Field('liker'))
 

@@ -811,3 +811,12 @@
 [2016-04-08 21:22:19] EDIT QuestionAnswer/models/menu.py: 0
 [2016-04-08 21:27:21] EDIT QuestionAnswer/views/default/index.html: -1
 [2016-04-08 21:35:19] EDIT QuestionAnswer/views/default/index.html: 0
+[2016-04-08 23:01:01] EDIT QuestionAnswer/models/db.py: 1
+[2016-04-08 23:22:24] EDIT QuestionAnswer/views/default/index.html: 11
+[2016-04-08 23:26:06] EDIT QuestionAnswer/views/default/show.html: 45
+[2016-04-08 23:32:00] EDIT QuestionAnswer/controllers/default.py: 11
+[2016-04-08 23:32:14] EDIT QuestionAnswer/controllers/default.py: -11
+[2016-04-08 23:33:12] EDIT QuestionAnswer/views/default/show.html: -45
+[2016-04-08 23:33:15] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-08 23:46:26] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-08 23:49:24] EDIT QuestionAnswer/controllers/default.py: 0

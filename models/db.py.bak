@@ -153,5 +153,6 @@ db.answer.question_id.writable = db.answer.question_id.readable = False
 db.answer.author.writable =db.answer.author.readable= False
 db.answer.likes.writable = db.answer.likes.readable = False
 db.answer.timestamp.writable = db.answer.timestamp.readable = False
+db.answer.email.writable = db.answer.email.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False
