@@ -4,11 +4,13 @@
 <div class="table-responsive">
     <table class="table table-hover">
         <tr><th>Title</th>
-            <th>Description</th></tr>
+            <th>Description</th>
+            <th>Number of Answers</th></tr>
     {{for image in images:}}
     <tr>
         <td>{{=A(image.title,_href=URL("show",args=image.id))}}</td>
         <td>{{=image.body}}</td>
+        <td>{{=image.no_ans}}</td>
     </tr>
     {{pass}}
     </table>

@@ -28,6 +28,7 @@ def homepage():
     else:
        page=0
     images=db(db.question.id>0).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    
     backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
     forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
@@ -40,8 +41,12 @@ def show():
     form = SQLFORM(db.answer)
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
+    
     if form.process().accepted:
-        response.flash = 'your answer is posted'
+        response.flash = 'Your answer is posted!'
+        new_ans=int(image.no_ans)+1
+        image.no_ans=new_ans
+        image.update_record()
     commentss = db(db.answer.question_id==image.id).select()
 #     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
     return dict(image=image, commentss=commentss, form=form)

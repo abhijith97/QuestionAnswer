@@ -121,6 +121,7 @@ db = DAL("sqlite://storage.sqlite")
 
 db.define_table('question',
    Field('title'),
+   Field('no_ans', default=0),
    Field('file', 'upload'),
    Field('author'),
    Field('email'),
@@ -147,6 +148,7 @@ db.question.body.requires = IS_NOT_EMPTY()
 db.question.author.writable = db.question.author.readable = False
 db.question.email.writable = db.question.email.readable = False
 db.question.timestamp.writable = db.question.timestamp.readable = False
+db.question.no_ans.writable = db.question.no_ans.readable = False
 
 db.answer.question_id.requires = IS_IN_DB(db, db.question.id, '%(title)s')
 db.answer.body.requires = IS_NOT_EMPTY()

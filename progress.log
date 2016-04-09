@@ -820,3 +820,16 @@
 [2016-04-08 23:33:15] EDIT QuestionAnswer/controllers/default.py: 0
 [2016-04-08 23:46:26] EDIT QuestionAnswer/controllers/default.py: 0
 [2016-04-08 23:49:24] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 14:38:50] EDIT QuestionAnswer/controllers/default.py: 1
+[2016-04-09 14:39:16] EDIT QuestionAnswer/models/db.py: 2
+[2016-04-09 14:42:32] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 14:51:22] EDIT QuestionAnswer/controllers/default.py: 2
+[2016-04-09 14:52:11] EDIT QuestionAnswer/models/db.py: -1
+[2016-04-09 14:53:08] EDIT QuestionAnswer/models/db.py: 1
+[2016-04-09 14:54:46] EDIT QuestionAnswer/views/default/homepage.html: 1
+[2016-04-09 14:55:00] EDIT QuestionAnswer/views/default/homepage.html: 1
+[2016-04-09 14:55:57] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 14:56:21] EDIT QuestionAnswer/views/default/homepage.html: 0
+[2016-04-09 14:57:42] EDIT QuestionAnswer/views/default/homepage.html: 0
+[2016-04-09 14:57:44] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 14:57:46] EDIT QuestionAnswer/models/db.py: 0
