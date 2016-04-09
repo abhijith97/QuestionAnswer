@@ -73,6 +73,8 @@ db1.define_table(
     Field('registration_id', length=512,                 # required
           writable=False, readable=False, default=''))
 
+
+
 custom_auth_table = db1[auth.settings.table_user_name] # get the custom_auth_table
 custom_auth_table.first_name.requires =   IS_NOT_EMPTY(error_message=auth.messages.is_empty)
 custom_auth_table.last_name.requires =   IS_NOT_EMPTY(error_message=auth.messages.is_empty)

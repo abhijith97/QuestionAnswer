@@ -81,20 +81,37 @@ def uploadpage():
 
 @auth.requires_login()
 def search():
-    db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
-    db.question.body.writable = db.question.body.readable = False
-    db.question.file.writable= db.question.file.readable= False
-    db.question.anonymous.writable= db.question.anonymous.readable= False
-    form=SQLFORM(db.question)
-    title=request.vars.title
-    if title:
-        tit='%'+str(title)+'%'
-        images=db(db.question.title.like(tit, case_sensitive=False)).select()
 
-        return dict(form=form, images=images)
-
+    
+    dropdown=request.vars.dropdown
+    textbox=request.vars.textbox
+    
+    if(dropdown=="Title"):
+        images=db(db.question.title == textbox).select()
+    elif(dropdown=="Description"):
+        images=db(db.question.body == textbox).select()
     else:
-        return dict(form = form, images="")
+        images=db(db.question.author == textbox).select()
+        
+    
+#     db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
+#     db.question.body.writable = db.question.body.readable = False
+#     db.question.file.writable= db.question.file.readable= False
+#     db.question.anonymous.writable= db.question.anonymous.readable= False
+#     form=SQLFORM(db.question)
+#     title=request.vars.title
+#     
+#         tit='%'+str(title)+'%'
+#         images=db(db.question.title.like(tit, case_sensitive=False)).select()
+
+#         return dict(form=form, images=images)
+
+#     else:
+#         return dict(form = form, images="")
+    if images:
+        return dict(images=images)
+    else:
+        return dict(images="")
 
 @auth.requires_login()
 def myquestions():

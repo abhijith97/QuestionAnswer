@@ -1,8 +1,16 @@
 {{extend 'layout.html'}}
 <h1>Search</h1>
 
-{{=form}}
 
+<form action="" method="post">
+
+<input  name="textbox" type="textbox">
+<select name="dropdown">
+<option value="Title" selected>Title</option>
+<option value="Description">Description</option>
+<option value="Author">Author</option>
+</select>
+<input type="submit" value="Submit" />
 <br><br>
 {{if len(images):}}
 <div class="table-responsive">
