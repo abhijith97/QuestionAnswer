@@ -2,3 +2,27 @@
 <h1>Search</h1>
 
 {{=form}}
+
+<br><br>
+{{if len(images):}}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr><th>Title</th>
+            <th>Description</th>
+            <th>Number of Answers</th></tr>
+    {{for image in images:}}
+    <tr>
+        <td>{{=A(image.title,_href=URL("show",args=image.id))}}</td>
+        <td>{{=image.body}}</td>
+        {{if image.no_ans == '0':}}
+        <td><div class="alert alert-danger">{{=image.no_ans}}</div></td>
+        
+        {{else:}}
+        <td><div class="alert alert-success">{{=image.no_ans}}</div></td>
+        {{pass}}
+        
+    </tr>
+    {{pass}}
+    </table>
+</div>
+{{pass}}

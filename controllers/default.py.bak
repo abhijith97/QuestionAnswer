@@ -72,6 +72,8 @@ def search():
     db.question.body.writable = db.question.body.readable = False
     db.question.file.writable= db.question.file.readable= False
     form=SQLFORM(db.question)
+    response.flash=BEAUTIFY(request.vars)
+    
 
     return dict(form=form)
 

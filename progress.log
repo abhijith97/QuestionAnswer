@@ -881,3 +881,15 @@
 [2016-04-09 16:33:29] EDIT QuestionAnswer/models/menu.py: 0
 [2016-04-09 16:33:33] EDIT QuestionAnswer/controllers/default.py: 0
 [2016-04-09 16:33:35] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 16:50:42] EDIT QuestionAnswer/controllers/default.py: 1
+[2016-04-09 16:51:57] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 16:52:19] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 16:52:33] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 16:52:52] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 16:57:26] EDIT QuestionAnswer/views/default/search.html: 19
+[2016-04-09 16:57:31] EDIT QuestionAnswer/views/default/search.html: 1
+[2016-04-09 16:57:35] EDIT QuestionAnswer/views/default/search.html: 0
+[2016-04-09 16:57:57] EDIT QuestionAnswer/controllers/default.py: 1
+[2016-04-09 16:58:24] EDIT QuestionAnswer/views/default/search.html: 0
+[2016-04-09 16:58:24] EDIT QuestionAnswer/views/default/search.html: 0
+[2016-04-09 16:58:49] EDIT QuestionAnswer/views/default/search.html: 1

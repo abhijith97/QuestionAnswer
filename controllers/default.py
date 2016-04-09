@@ -72,8 +72,13 @@ def search():
     db.question.body.writable = db.question.body.readable = False
     db.question.file.writable= db.question.file.readable= False
     form=SQLFORM(db.question)
+    title=request.vars.title
+    
+    images=db(db.question.title==title).select()
+    
+    
 
-    return dict(form=form)
+    return dict(form=form, images=images)
 
 @auth.requires_login()
 def myquestions():
