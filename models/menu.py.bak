@@ -27,7 +27,8 @@ response.google_analytics_id = None
 response.menu = [
     (T('Questions'), False, URL('default', 'homepage'), []),
     (T('Ask'), False, URL('default', 'uploadpage'), []),
-    (T('My Questions'), False, URL('default', 'myquestions'), [])]
+    (T('My Questions'), False, URL('default', 'myquestions'), []),
+    (T('Search'), False, URL('default', 'search'), [])]
 
 if auth.has_membership('user_7'):
     response.menu.append((T('Manage Questions'),False,URL('default','managequestions'),[]))
