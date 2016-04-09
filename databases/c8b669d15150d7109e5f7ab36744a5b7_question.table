@@ -39,11 +39,7 @@ I00
 sg10
 S'string'
 p15
-<<<<<<< HEAD
 ssS'anonymous'
-=======
-ssS'file'
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 p16
 (dp17
 g4
@@ -51,7 +47,6 @@ I512
 sg5
 I00
 sg6
-<<<<<<< HEAD
 I8
 sg7
 S'CHAR(1)'
@@ -60,26 +55,6 @@ sg9
 I00
 sg10
 S'boolean'
-p19
-ssS'author'
-p20
-(dp21
-g4
-I512
-sg5
-I00
-sg6
-I5
-=======
-I4
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
-sg7
-S'CHAR(512)'
-p22
-sg9
-I00
-sg10
-S'upload'
 p19
 ssS'author'
 p20
@@ -130,11 +105,7 @@ sg9
 I00
 sg10
 g15
-<<<<<<< HEAD
 ssS'email'
-=======
-ssS'id'
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 p30
 (dp31
 g4
@@ -142,21 +113,15 @@ I512
 sg5
 I00
 sg6
-I1
+I6
 sg7
-<<<<<<< HEAD
 S'CHAR(512)'
-=======
-S'INTEGER PRIMARY KEY AUTOINCREMENT'
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 p32
 sg9
 I00
 sg10
-S'id'
-p33
+g15
 ssS'likes'
-<<<<<<< HEAD
 p33
 (dp34
 S'sortable'
@@ -182,41 +147,13 @@ p42
 ssS'file'
 p43
 (dp44
-=======
-p34
-(dp35
-S'sortable'
-p36
-I8
-sS'sql'
-p37
-S'CHAR(512)'
-p38
-sS'length'
-p39
-I512
-sS'notnull'
-p40
-I00
-sS'unique'
-p41
-I00
-sS'type'
-p42
-S'string'
-p43
-ssS'anonymous'
-p44
-(dp45
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 g4
 I512
 sg5
 I00
 sg6
-I8
+I4
 sg7
-<<<<<<< HEAD
 S'CHAR(512)'
 p45
 sg9
@@ -227,26 +164,13 @@ p46
 ssS'id'
 p47
 (dp48
-=======
-S'CHAR(1)'
-p46
-sg9
-I00
-sg10
-S'boolean'
-p47
-ssS'email'
-p48
-(dp49
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 g4
 I512
 sg5
 I00
 sg6
-I6
+I1
 sg7
-<<<<<<< HEAD
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
 p49
 sg9
@@ -254,12 +178,4 @@ I00
 sg10
 S'id'
 p50
-=======
-S'CHAR(512)'
-p50
-sg9
-I00
-sg10
-g15
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 ss.

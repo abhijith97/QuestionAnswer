@@ -102,11 +102,10 @@ def search():
     db.question.anonymous.writable= db.question.anonymous.readable= False
     form=SQLFORM(db.question)
     title=request.vars.title
-<<<<<<< HEAD
+
     
     images=db(db.question.title==title).select()
     return dict(form=form, images=images)
-=======
     if title:
         tit='%'+str(title)+'%'
         images=db(db.question.title.like(tit, case_sensitive=False)).select()
@@ -115,7 +114,6 @@ def search():
 
     else:
         return dict(form = form, images="")
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 
 @auth.requires_login()
 def myquestions():
