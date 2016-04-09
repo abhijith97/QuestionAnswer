@@ -43,7 +43,6 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
-    
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
         new_ans=int(image.no_ans)+1
@@ -75,10 +74,13 @@ def search():
     db.question.body.writable = db.question.body.readable = False
     db.question.file.writable= db.question.file.readable= False
     form=SQLFORM(db.question)
-    response.flash=BEAUTIFY(request.vars)
+    title=request.vars.title
+    
+    images=db(db.question.title==title).select()
+    
     
 
-    return dict(form=form)
+    return dict(form=form, images=images)
 
 @auth.requires_login()
 def myquestions():
@@ -140,7 +142,7 @@ def dislike():
         rec.update_record()
         
     elif liked and int(liked.upordown)==-1:
-        new_likes=(int)image.likes+1;
+        new_likes=int(image.likes)+1;
         image.likes=new_likes;
         image.update_record()
         db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).delete()

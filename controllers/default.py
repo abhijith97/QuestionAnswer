@@ -77,9 +77,6 @@ def search():
     title=request.vars.title
     
     images=db(db.question.title==title).select()
-    
-    
-
     return dict(form=form, images=images)
 
 @auth.requires_login()
