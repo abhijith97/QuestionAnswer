@@ -893,3 +893,10 @@
 [2016-04-09 16:58:24] EDIT QuestionAnswer/views/default/search.html: 0
 [2016-04-09 16:58:24] EDIT QuestionAnswer/views/default/search.html: 0
 [2016-04-09 16:58:49] EDIT QuestionAnswer/views/default/search.html: 1
+[2016-04-09 18:45:42] EDIT QuestionAnswer/models/db.py: 1
+[2016-04-09 18:45:49] EDIT QuestionAnswer/models/db.py: 0
+[2016-04-09 18:48:53] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 18:48:59] EDIT QuestionAnswer/controllers/default.py: 0
+[2016-04-09 18:52:19] EDIT QuestionAnswer/views/default/show.html: 4
+[2016-04-09 18:53:00] EDIT QuestionAnswer/views/default/show.html: 0
+[2016-04-09 18:53:30] EDIT QuestionAnswer/views/default/show.html: 0

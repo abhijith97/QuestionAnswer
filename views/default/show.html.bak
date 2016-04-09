@@ -250,7 +250,11 @@ body {
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
 <h1 class="page-header">{{=image.title}}</h1>
+{{if image.anonymous==true:}
+<h3>Uploaded by: Anonymous</h3>
+{{else:}}
 <h3>Uploaded by: {{=image.author}}</h3>
+{{pass}}
 <small>{{=image.timestamp.date()}}</small>
 {{if image.file:}}
 <div style="text-align:center">
@@ -289,7 +293,6 @@ body {
                         {{flag=0}}
                         {{for i in likess:}}
                             {{if i.ans_id==posts.id and int(i.upordown)==1:}}
-                                <div>{{=posts.id}} Answer</div>
                                 {{flag=1}}
                                 <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
                                 <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
@@ -307,7 +310,7 @@ body {
                     </div>
                 </div>
             </li>
-                     {{pass}} 
+                     {{pass}}
     </ul>
 
 

@@ -126,6 +126,7 @@ db.define_table('question',
    Field('author'),
    Field('email'),
    Field('body', 'text'),
+   Field('anonymous', 'boolean'),             
    Field('timestamp','datetime',default=request.now))
 
 

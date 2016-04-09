@@ -250,7 +250,11 @@ body {
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
 <h1 class="page-header">{{=image.title}}</h1>
+{{if image.anonymous==True:}}
+<h3>Uploaded by: Anonymous</h3>
+{{else:}}
 <h3>Uploaded by: {{=image.author}}</h3>
+{{pass}}
 <small>{{=image.timestamp.date()}}</small>
 {{if image.file:}}
 <div style="text-align:center">
@@ -306,7 +310,7 @@ body {
                     </div>
                 </div>
             </li>
-                     {{pass}} 
+                     {{pass}}
     </ul>
 
 

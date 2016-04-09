@@ -63,7 +63,7 @@ def uploadpage():
     form.add_button('Back', URL('homepage'))
     
     if form.process().accepted:
-        response.flash="Your recipe is posted"
+        response.flash="Your question is posted!"
         redirect(URL('default','homepage'))
     return dict(form=form)
 
