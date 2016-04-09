@@ -62,7 +62,7 @@ def uploadpage():
     
     if form.process().accepted:
         response.flash="Your recipe is posted"
-        redirect(URL('default','myquestions'))
+        redirect(URL('default','homepage'))
     return dict(form=form)
 
 @auth.requires_login()

@@ -10,7 +10,13 @@
     <tr>
         <td>{{=A(image.title,_href=URL("show",args=image.id))}}</td>
         <td>{{=image.body}}</td>
-        <td>{{=image.no_ans}}</td>
+        {{if image.no_ans == 0:}}
+        <td><div class="alert alert-danger">{{=image.no_ans}}</div></td>
+        
+        {{else:}}
+        <td><div class="alert alert-success">{{=image.no_ans}}</div></td>
+        {{pass}}
+        
     </tr>
     {{pass}}
     </table>

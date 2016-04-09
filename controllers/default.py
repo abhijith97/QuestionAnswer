@@ -62,7 +62,7 @@ def uploadpage():
     
     if form.process().accepted:
         response.flash="Your recipe is posted"
-        redirect(URL('default','myquestions'))
+        redirect(URL('default','homepage'))
     return dict(form=form)
 
 @auth.requires_login()
@@ -105,7 +105,7 @@ def edit():
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
     form = SQLFORM(db.question,image)
     if form.process().accepted:
-        response.flash = 'your question is edited'
+        response.flash = 'Your question is edited!'
     return dict(image=image, form=form)
     
     
