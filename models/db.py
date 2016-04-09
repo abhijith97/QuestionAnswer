@@ -126,12 +126,8 @@ db.define_table('question',
    Field('author'),
    Field('email'),
    Field('body', 'text'),
+   Field('anonymous', 'boolean'),
    Field('timestamp','datetime',default=request.now))
-
-
-
-
-
 
 db.define_table('answer',
    Field('question_id', 'reference question'),
@@ -141,6 +137,11 @@ db.define_table('answer',
    Field('body', 'text'),
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
+
+db.define_table('review',
+                Field('question_id','reference question'),
+                Field('view','text'),
+                Field('sensible','boolean'))
 
 db.define_table('likes',
                Field('question_id','reference question'),
@@ -162,5 +163,7 @@ db.answer.author.writable =db.answer.author.readable= False
 db.answer.likes.writable = db.answer.likes.readable = False
 db.answer.timestamp.writable = db.answer.timestamp.readable = False
 db.answer.email.writable = db.answer.email.readable = False
+
+db.review.question_id.writable = db.review.question_id.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False

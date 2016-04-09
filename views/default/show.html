@@ -250,7 +250,11 @@ body {
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
 <h1 class="page-header">{{=image.title}}</h1>
+{{if image.anonymous==True:}}
+<h3>Uploaded by: Anonymous</h3>
+{{else:}}
 <h3>Uploaded by: {{=image.author}}</h3>
+{{pass}}
 <small>{{=image.timestamp.date()}}</small>
 {{if image.file:}}
 <div style="text-align:center">
@@ -265,7 +269,23 @@ body {
 <h3>{{=image.body}}</h3>
     </div>
 </div>
-
+{{if len(views):}}
+<div>Expert's Review:
+<div>
+    {{for view in views:}}
+    <div>
+        {{=view.view}}
+    </div>
+    <div>
+        {{if view.sensible:}}
+        Sensible
+        {{else:}}
+        Nonsense
+        {{pass}}
+    </div>
+    {{pass}}
+    </div></div>
+{{pass}}
 
 {{if len(commentss):}}
 <div class="comments-container">
@@ -306,7 +326,7 @@ body {
                     </div>
                 </div>
             </li>
-                     {{pass}} 
+                     {{pass}}
     </ul>
 
 

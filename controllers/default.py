@@ -34,6 +34,21 @@ def homepage():
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
     return dict(images=images,backward=backward,forward=forward, nav=nav)
 
+@auth.requires_membership('Expert')
+def expert_homepage():
+    totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
+    showlines = 25    # number of records per page
+    if len(request.args):
+       page=int(request.args[0])
+    else:
+       page=0
+    images=db(db.question.id>0).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    
+    backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
+    forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
+    return dict(images=images,backward=backward,forward=forward, nav=nav)
+
 @auth.requires_login()   
 def show():
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
@@ -49,9 +64,9 @@ def show():
         image.no_ans=new_ans
         image.update_record()
     commentss = db(db.answer.question_id==image.id).select()
-#     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
+    views=db(db.review.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
-    return dict(image=image, commentss=commentss, likess=likess, form=form)
+    return dict(image=image, commentss=commentss, likess=likess, views=views, form=form)
 
 
 
@@ -63,7 +78,7 @@ def uploadpage():
     form.add_button('Back', URL('homepage'))
     
     if form.process().accepted:
-        response.flash="Your recipe is posted"
+        response.flash="Your question is posted!"
         redirect(URL('default','homepage'))
     return dict(form=form)
 
@@ -178,6 +193,16 @@ def managequestions():
     grid = SQLFORM.smartgrid(db.question,linked_tables=['question'])
     return dict(grid=grid)
     
+
+def reviews():
+    response.flash="Hello"
+#     response.flash=BEAUTIFY(request.vars.id)
+    image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
+    form=SQLFORM(db.review)
+    form.vars.question_id=image.id
+    if form.process().accepted:
+        response.flash="Your review is added"
+    return dict(form=form)
 
 def user():
     """

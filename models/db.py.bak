@@ -126,12 +126,8 @@ db.define_table('question',
    Field('author'),
    Field('email'),
    Field('body', 'text'),
+   Field('anonymous', 'boolean'),
    Field('timestamp','datetime',default=request.now))
-
-
-db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
-
-
 
 db.define_table('answer',
    Field('question_id', 'reference question'),
@@ -142,11 +138,16 @@ db.define_table('answer',
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
 
+db.define_table('review',
+                Field('question_id','reference question'),
+                Field('view','text'),
+                Field('sensible','boolean'))
+
 db.define_table('likes',
                Field('question_id','reference question'),
                Field('ans_id','reference answer'),
                Field('liker'),
-               Field('upordown' , default=0))
+               Field('upordown'))
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
