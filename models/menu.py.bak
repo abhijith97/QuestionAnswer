@@ -6,7 +6,7 @@
 #########################################################################
 
 response.logo = A(B('Ask&Answer'),XML('&trade;&nbsp;'),
-                  _class="navbar-brand",_href="http://127.0.0.1:8000/Cooking/default/index",
+                  _class="navbar-brand",_href="http://127.0.0.1:8000/QuestionAnswer/default/index",
                   _id="web2py-logo")
 response.title = request.application.replace('_',' ').title()
 response.subtitle = ''
@@ -27,7 +27,8 @@ response.google_analytics_id = None
 response.menu = [
     (T('Questions'), False, URL('default', 'homepage'), []),
     (T('Ask'), False, URL('default', 'uploadpage'), []),
-    (T('My Questions'), False, URL('default', 'myquestions'), [])]
+    (T('My Questions'), False, URL('default', 'myquestions'), []),
+    (T('Search'), False, URL('default', 'search'), [])]
 
 if auth.has_membership('user_7'):
     response.menu.append((T('Manage Questions'),False,URL('default','managequestions'),[]))

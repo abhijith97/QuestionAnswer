@@ -7490,6 +7490,7 @@ success!
 success!
 success!
 success!
+
 timestamp: 2016-04-09T14:15:40.026209
 ALTER TABLE likes ADD question_id INTEGER REFERENCES question (id) ON DELETE CASCADE  ;
 success!
@@ -7764,6 +7765,8 @@ success!
 success!
 success!
 success!
+timestamp: 2016-04-09T14:39:19.724740
+ALTER TABLE question ADD no_ans CHAR(512);
 success!
 success!
 success!

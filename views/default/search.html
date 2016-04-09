@@ -1,5 +1,9 @@
 {{extend 'layout.html'}}
-<h1>Latest Questions</h1>
+<h1>Search</h1>
+
+{{=form}}
+
+<br><br>
 {{if len(images):}}
 <div class="table-responsive">
     <table class="table table-hover">
@@ -21,9 +25,4 @@
     {{pass}}
     </table>
 </div>
-        {{=backward}}
-        {{=forward}}
-        {{=nav}}
-{{else:}}
-    <h1>No Recipes uploaded yet!!</h1>
 {{pass}}

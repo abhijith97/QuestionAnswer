@@ -28,6 +28,7 @@ def homepage():
     else:
        page=0
     images=db(db.question.id>0).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    
     backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
     forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
@@ -43,7 +44,10 @@ def show():
     form.vars.email=auth.user.email
     form.vars.likes=0
     if form.process().accepted:
-        response.flash = 'your answer is posted'
+        response.flash = 'Your answer is posted!'
+        new_ans=int(image.no_ans)+1
+        image.no_ans=new_ans
+        image.update_record()
     commentss = db(db.answer.question_id==image.id).select()
 #     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
@@ -60,8 +64,23 @@ def uploadpage():
     
     if form.process().accepted:
         response.flash="Your recipe is posted"
-        redirect(URL('default','myquestions'))
+        redirect(URL('default','homepage'))
     return dict(form=form)
+
+
+@auth.requires_login()
+def search():
+    db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
+    db.question.body.writable = db.question.body.readable = False
+    db.question.file.writable= db.question.file.readable= False
+    form=SQLFORM(db.question)
+    title=request.vars.title
+    
+    images=db(db.question.title==title).select()
+    
+    
+
+    return dict(form=form, images=images)
 
 @auth.requires_login()
 def myquestions():
@@ -140,7 +159,7 @@ def edit():
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
     form = SQLFORM(db.question,image)
     if form.process().accepted:
-        response.flash = 'your question is edited'
+        response.flash = 'Your question is edited!'
     return dict(image=image, form=form)
     
     
