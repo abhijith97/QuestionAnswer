@@ -248,24 +248,7 @@ body {
 </style>
 
 <form><input type="hidden" id="id" name="id" value="" /></form>
-<script>
-    function func(idno)
-    {
-        jQuery('#id').val(idno);
-        ajax('{{=URL('default', 'like')}}', ['id'], 'imagelikes');
-    }
-    function change()
-    {
-        if(document.getElementById("likepic").innerHTML=='LIKE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
-        {
-            document.getElementById("likepic").innerHTML='UNLIKE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
-        }
-        else if(document.getElementById("likepic").innerHTML=='UNLIKE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
-        {
-            document.getElementById("likepic").innerHTML='LIKE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
-        }
-    }
-</script>
+
 <h1 class="page-header">{{=image.title}}</h1>
 <h3>Uploaded by: {{=image.author}}</h3>
 <small>{{=image.timestamp.date()}}</small>
@@ -303,6 +286,23 @@ body {
                            {{=posts.body}}
 
                         </div>
+                        {{flag=0}}
+                        {{for i in likess:}}
+                            {{if i.ans_id==posts.id and int(i.upordown)==1:}}
+                                {{flag=1}}
+                                <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                                <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                            {{elif i.ans_id==posts.id and int(i.upordown)==-1:}}
+                            <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                            <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                        {{flag=1}}
+                        {{pass}}
+                        {{pass}}
+                        {{if flag==0:}}
+                         <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                         <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                        {{pass}}
+                        <span id="{{=posts.id}}">{{=posts.likes}} Likes</span>
                     </div>
                 </div>
             </li>
@@ -317,3 +317,52 @@ body {
 {{=form}}
 
 {{include 'web2py_ajax.html'}}
+    
+    
+<script>
+    function up(idno)
+    {
+        jQuery('#id').val(idno);
+        ajax('{{=URL('default', 'like')}}', ['id'], idno);
+    }
+    function down(idno)
+    {
+        jQuery('#id').val(idno);
+        ajax('{{=URL('default', 'dislike')}}', ['id'], idno);
+    }
+    function change1(idno)
+    {
+        
+        id1=idno+"likepic"
+        id2=idno+"dislikepic"
+        if(document.getElementById(id1).innerHTML=='UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
+        {
+            document.getElementById(id1).innerHTML='UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
+        }
+        else if(document.getElementById(id1).innerHTML=='UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
+        {
+            document.getElementById(id1).innerHTML='UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
+        }
+        if(document.getElementById(id2).innerHTML=='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
+        {
+            document.getElementById(id2).innerHTML='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+    }
+    function change2(idno)
+    {
+        id1=idno+"likepic"
+        id2=idno+"dislikepic"
+        if(document.getElementById(id1).innerHTML=='UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
+        {
+            document.getElementById(id1).innerHTML='UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
+        }
+        if(document.getElementById(id2).innerHTML=='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
+        {
+            document.getElementById(id2).innerHTML='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+        else if(document.getElementById(id2).innerHTML=='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
+        {
+            document.getElementById(id2).innerHTML='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+    }
+</script>

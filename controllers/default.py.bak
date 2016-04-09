@@ -38,13 +38,16 @@ def show():
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
     db.answer.question_id.default = image.id
     form = SQLFORM(db.answer)
+    form.vars.question_id=image.id
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
+    form.vars.likes=0
     if form.process().accepted:
         response.flash = 'your answer is posted'
     commentss = db(db.answer.question_id==image.id).select()
 #     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
-    return dict(image=image, commentss=commentss, form=form)
+    likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
+    return dict(image=image, commentss=commentss, likess=likess, form=form)
 
 
 
@@ -78,22 +81,59 @@ def myquestions():
 
 @auth.requires_login()
 def like():
-#     response.flash=BEAUTIFY(request.vars)
     image = db(db.answer.id==request.vars.id).select().first()
-    liked=db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).count()
-    if liked==0:
+    ques=db(db.question.id==image.question_id).select().first()
+    liked=db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).select().first()
+   
+    if  liked and int(liked.upordown)==-1:
+        new_likes=int(image.likes)+2
+        image.likes=new_likes
+        image.update_record()
+        rec=db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).select().first()
+        rec.upordown=1
+        rec.update_record()
+    
+    elif liked and int(liked.upordown)==1:
+        new_likes=int(image.likes)-1;
+        image.likes=new_likes;
+        image.update_record()
+        db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).delete()
+        
+    else:
         new_likes=int(image.likes)+1
         image.likes=new_likes
         image.update_record()
-        db.likes.insert(ans_id=image.id,liker=auth.user.email)
-        response.flash="Liked"
+        db.likes.insert(question_id=ques.id,ans_id=image.id,liker=auth.user.email,upordown=1)
+        
+    return str(image.likes)+" Likes"
+
+@auth.requires_login()
+def dislike():
+    image = db(db.answer.id==request.vars.id).select().first()
+    response.flash=image.question_id
+    ques=db(db.question.id==image.question_id).select().first()
+    liked=db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).select().first()
+   
+    if  liked and int(liked.upordown)==1:
+        new_likes=int(image.likes)-2
+        image.likes=new_likes
+        image.update_record()
+        rec=db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).select().first()
+        rec.upordown=-1
+        rec.update_record()
+        
+    elif liked and int(liked.upordown)==-1:
+        new_likes=(int)image.likes+1;
+        image.likes=new_likes;
+        image.update_record()
+        db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).delete()
+        
     else:
-        response.flash="Unliked"
         new_likes=int(image.likes)-1
         image.likes=new_likes
         image.update_record()
-        db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).delete()
-    return str(new_likes)+" Likes"
+        db.likes.insert(question_id=ques.id,ans_id=image.id,liker=auth.user.email,upordown=-1)
+    return str(image.likes)+" Likes"
 
 @auth.requires_login()
 def edit():

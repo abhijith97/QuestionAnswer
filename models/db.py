@@ -125,8 +125,7 @@ db.define_table('question',
    Field('author'),
    Field('email'),
    Field('body', 'text'),
-   Field('timestamp','datetime',default=request.now),
-   format = '%(title)s')
+   Field('timestamp','datetime',default=request.now))
 
 db.define_table('answer',
    Field('question_id', 'reference question'),
@@ -138,9 +137,10 @@ db.define_table('answer',
    Field('likes'))
 
 db.define_table('likes',
-                Field('quest_id','reference question'),
+               Field('question_id','reference question'),
                Field('ans_id','reference answer'),
-               Field('liker'))
+               Field('liker'),
+               Field('upordown'))
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
@@ -148,7 +148,7 @@ db.question.author.writable = db.question.author.readable = False
 db.question.email.writable = db.question.email.readable = False
 db.question.timestamp.writable = db.question.timestamp.readable = False
 
-db.answer.question_id.requires = IS_IN_DB(db, db.question.id, '%(title)s')
+# db.answer.question_id.requires = IS_IN_DB(db, db.question.id, '%(title)s')
 db.answer.body.requires = IS_NOT_EMPTY()
 db.answer.question_id.writable = db.answer.question_id.readable = False
 db.answer.author.writable =db.answer.author.readable= False

@@ -1,15 +1,13 @@
 {{extend 'layout.html'}}
-
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <style>
-
-
-
 /**
  * Oscuro: #283035
  * Azul: #03658c
  * Detalle: #c7cacb
  * Fondo: #dee1e3
  ----------------------------------*/
+
  * {
     margin: 0;
     padding: 0;
@@ -83,18 +81,6 @@ body {
     border-radius: 50%;
 }
 
-.reply-list:before, .reply-list:after {display: none;}
-.reply-list li:before {
-    content: '';
-    width: 60px;
-    height: 2px;
-    background: #c7cacb;
-    position: absolute;
-    top: 25px;
-    left: -55px;
-}
-
-
 .comments-list li {
     margin-bottom: 15px;
     display: block;
@@ -109,14 +95,6 @@ body {
     width: 0;
 }
 
-.reply-list {
-    padding-left: 88px;
-    clear: both;
-    margin-top: 15px;
-}
-/**
- * Avatar
- ---------------------------*/
 .comments-list .comment-avatar {
     width: 65px;
     height: 65px;
@@ -181,9 +159,6 @@ body {
     left: -12px;
 }
 
-.reply-list .comment-box {
-    width: 610px;
-}
 .comment-box .comment-head {
     background: #FCFCFC;
     padding: 10px 12px;
@@ -270,130 +245,125 @@ body {
         width: 320px;
     }
 }
-
-
 </style>
-
-
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
-
 
 <form><input type="hidden" id="id" name="id" value="" /></form>
-<div class="page-header">
- <h1>{{=post.title}}</h1>
-    <small>{{=post.timestamp.date()}}</small>
-</div>
 
-
-
+<h1 class="page-header">{{=image.title}}</h1>
+<h3>Uploaded by: {{=image.author}}</h3>
+<small>{{=image.timestamp.date()}}</small>
+{{if image.file:}}
 <div style="text-align:center">
-<img class="img-rounded" width="600px" src="{{=URL('download', args=post.file)}}"/>
+<img width="500px"
+     src="{{=URL('download', args=image.file)}}" />
 </div>
-
-<br><br>
-<h4>
-   Short Description : 
-</h4>
-    
-<div class="container">
-  <div class="jumbotron">
-{{=post.body}}
-    </div>
-</div>
-<h4>
-    Recipe :
-</h4>
-
-<div class="container">
-  <div class="jumbotron">
-    {{=post.recipe}}
-    </div>
-    </div>
-
-{{if count==0:}}
-<button class="btn btn-primary" id="like" onclick="swtch();increase('{{=post.id}}');"><i class="fa fa-thumbs-up" style="font-size:24px"></i> LIKE</button>
-
-{{else:}}
-<button class="btn btn-primary" id="like" onclick="swtch();increase('{{=post.id}}');"><i class="fa fa-thumbs-down" style="font-size:24px"></i> UNLIKE</button>
 {{pass}}
-
-
-<span id="target">{{=post.likes}} likes</span>
-
-
-<style>
-#target
-    {
-       width:5%; 
-       text-align:center;
-        font-weight:bold;
-        color:navy
-        
-    }
-</style>
-<div class="comments-container">
-    <div class="well well-sm" style="text-align:center">
-<h3>Comments</h3>
+<br>
+<div class="container">
+    <h3>Question: </h3>
+    <div class="jumbotron">
+<h3>{{=image.body}}</h3>
     </div>
-{{if len(comments):}}
-    
-
-  {{for post1 in comments:}}
+</div>
 
 
-
+{{if len(commentss):}}
+<div class="comments-container">
+        <h1>Answers</h1>
 
         <ul id="comments-list" class="comments-list">
+                      {{for posts in commentss:}}
             <li>
                 <div class="comment-main-level">
                     <!-- Avatar -->
-                    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt="Avatar"></div>
-
+                    <div class="comment-avatar"><img src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt=""></div>
+                    <!-- Contenedor del Comentario -->
                     <div class="comment-box">
                         <div class="comment-head">
-                            <h6 class="comment-name">{{=post1.author}}</h6>
-
+                            <h6 class="comment-name">{{=posts.author}}</h6>
                         </div>
                         <div class="comment-content">
-                            {{=post1.comment}}
+                           {{=posts.body}}
+
                         </div>
+                        {{flag=0}}
+                        {{for i in likess:}}
+                            {{if i.ans_id==posts.id and int(i.upordown)==1:}}
+                                <div>{{=posts.id}} Answer</div>
+                                {{flag=1}}
+                                <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                                <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                            {{elif i.ans_id==posts.id and int(i.upordown)==-1:}}
+                            <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                            <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                        {{flag=1}}
+                        {{pass}}
+                        {{pass}}
+                        {{if flag==0:}}
+                         <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                         <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                        {{pass}}
+                        <span id="{{=posts.id}}">{{=posts.likes}} Likes</span>
                     </div>
                 </div>
             </li>
+                     {{pass}} 
     </ul>
 
 
-  {{pass}}
 {{else:}}
-  <div class="alert alert-danger">
-    <h3>No Comments!
-    </h3>
-    </div>
+  <h2>No answers posted yet</h2>
 {{pass}}
-<h3>Post a comment</h3>
+<h2>Answer the question</h2>
 {{=form}}
 
+{{include 'web2py_ajax.html'}}
+    
+    
 <script>
-    
-    function swtch()
+    function up(idno)
     {
-         
-          if((document.getElementById("like").innerHTML) =='<i class="fa fa-thumbs-up" style="font-size:24px"></i> LIKE')
-          {
-              
-              document.getElementById("like").innerHTML='<i class="fa fa-thumbs-down" style="font-size:24px"></i> UNLIKE';
-          }   
-          else if((document.getElementById("like").innerHTML) =='<i class="fa fa-thumbs-down" style="font-size:24px"></i> UNLIKE')
-          {   document.getElementById("like").innerHTML='<i class="fa fa-thumbs-up" style="font-size:24px"></i> LIKE';
-          }
+        jQuery('#id').val(idno);
+        ajax('{{=URL('default', 'like')}}', ['id'], idno);
     }
-    
-    function increase(name)
+    function down(idno)
     {
-       
-        jQuery('#id').val(name)
-        ajax('{{=URL('default' , 'increase_likes')}}',['id'] ,'target')
+        jQuery('#id').val(idno);
+        ajax('{{=URL('default', 'dislike')}}', ['id'], idno);
     }
-
+    function change1(idno)
+    {
+        
+        id1=idno+"likepic"
+        id2=idno+"dislikepic"
+        if(document.getElementById(id1).innerHTML=='UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
+        {
+            document.getElementById(id1).innerHTML='UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
+        }
+        else if(document.getElementById(id1).innerHTML=='UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
+        {
+            document.getElementById(id1).innerHTML='UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
+        }
+        if(document.getElementById(id2).innerHTML=='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
+        {
+            document.getElementById(id2).innerHTML='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+    }
+    function change2(idno)
+    {
+        id1=idno+"likepic"
+        id2=idno+"dislikepic"
+        if(document.getElementById(id1).innerHTML=='UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i>')
+        {
+            document.getElementById(id1).innerHTML='UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i>'
+        }
+        if(document.getElementById(id2).innerHTML=='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
+        {
+            document.getElementById(id2).innerHTML='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+        else if(document.getElementById(id2).innerHTML=='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
+        {
+            document.getElementById(id2).innerHTML='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+    }
 </script>
