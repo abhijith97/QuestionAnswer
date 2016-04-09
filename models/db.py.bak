@@ -64,8 +64,7 @@ db1.define_table(
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,readable=False, label='Password'), #required
     Field('phone'),
-    Field('badge', default="bronze"),
-    Field('no_ans', default=0),
+    Field('noofans'),
     Field('registration_key', length=512,                # required
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,              # required
@@ -165,5 +164,7 @@ db.answer.author.writable =db.answer.author.readable= False
 db.answer.likes.writable = db.answer.likes.readable = False
 db.answer.timestamp.writable = db.answer.timestamp.readable = False
 db.answer.email.writable = db.answer.email.readable = False
+
+db.review.question_id.writable = db.review.question_id.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False

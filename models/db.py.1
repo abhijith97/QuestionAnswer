@@ -64,6 +64,7 @@ db1.define_table(
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,readable=False, label='Password'), #required
     Field('phone'),
+    Field('noofans'),
     Field('registration_key', length=512,                # required
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,              # required
@@ -120,16 +121,17 @@ auth.settings.reset_password_requires_verification = True
 db = DAL("sqlite://storage.sqlite")
 
 db.define_table('question',
+   Field('title'),
+   Field('no_ans', default=0),
    Field('file', 'upload'),
    Field('author'),
    Field('email'),
    Field('body', 'text'),
-   Field('timestamp','datetime',default=request.now),
-   format = '%(title)s')
+   Field('anonymous', 'boolean'),
+   Field('timestamp','datetime',default=request.now))
 
 db.define_table('answer',
-   Field('ques_id', 'reference question'),
-   Field('title', unique=True),
+   Field('question_id', 'reference question'),
    Field('file', 'upload'),
    Field('author'),
    Field('email'),
@@ -137,22 +139,32 @@ db.define_table('answer',
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
 
+db.define_table('review',
+                Field('question_id','reference question'),
+                Field('view','text'),
+                Field('sensible','boolean'))
+
 db.define_table('likes',
+               Field('question_id','reference question'),
                Field('ans_id','reference answer'),
-               Field('liker'))
+               Field('liker'),
+               Field('upordown'))
 
 db.question.id.readable=db.question.id.writable=False
-db.question.title.requires = IS_NOT_IN_DB(db, db.question.title)
-db.question.file.requires = IS_NOT_EMPTY()
 db.question.body.requires = IS_NOT_EMPTY()
 db.question.author.writable = db.question.author.readable = False
 db.question.email.writable = db.question.email.readable = False
 db.question.timestamp.writable = db.question.timestamp.readable = False
+db.question.no_ans.writable = db.question.no_ans.readable = False
 
-db.answer.question_id.requires = IS_IN_DB(db, db.question.id, '%(title)s')
+# db.answer.question_id.requires = IS_IN_DB(db, db.question.id, '%(title)s')
 db.answer.body.requires = IS_NOT_EMPTY()
 db.answer.question_id.writable = db.answer.question_id.readable = False
 db.answer.author.writable =db.answer.author.readable= False
 db.answer.likes.writable = db.answer.likes.readable = False
+db.answer.timestamp.writable = db.answer.timestamp.readable = False
+db.answer.email.writable = db.answer.email.readable = False
+
+db.review.question_id.writable = db.review.question_id.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False
