@@ -34,6 +34,21 @@ def homepage():
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
     return dict(images=images,backward=backward,forward=forward, nav=nav)
 
+@auth.requires_membership('Expert')
+def expert_homepage():
+    totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
+    showlines = 25    # number of records per page
+    if len(request.args):
+       page=int(request.args[0])
+    else:
+       page=0
+    images=db(db.question.id>0).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    
+    backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
+    forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
+    return dict(images=images,backward=backward,forward=forward, nav=nav)
+
 @auth.requires_login()   
 def show():
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
@@ -43,8 +58,7 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
-    
-    usr=db1(db1.auth_user.email==auth.user.email).select().first()
+
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
         new_ans=int(image.no_ans)+1
@@ -60,9 +74,9 @@ def show():
         
         
     commentss = db(db.answer.question_id==image.id).select()
-#     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
+    views=db(db.review.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
-    return dict(image=image, commentss=commentss, likess=likess, form=form)
+    return dict(image=image, commentss=commentss, likess=likess, views=views, form=form)
 
 
 
@@ -81,6 +95,7 @@ def uploadpage():
 
 @auth.requires_login()
 def search():
+
     response.flash=BEAUTIFY(request.vars)
     
     dropdown=request.vars.dropdown
@@ -94,24 +109,13 @@ def search():
         images=db(db.question.author == textbox).select()
         
     
-#     db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
-#     db.question.body.writable = db.question.body.readable = False
-#     db.question.file.writable= db.question.file.readable= False
-#     db.question.anonymous.writable= db.question.anonymous.readable= False
-#     form=SQLFORM(db.question)
-#     title=request.vars.title
-#     
-#         tit='%'+str(title)+'%'
-#         images=db(db.question.title.like(tit, case_sensitive=False)).select()
 
-#         return dict(form=form, images=images)
-
-#     else:
-#         return dict(form = form, images="")
     if images:
         return dict(images=images)
     else:
         return dict(images="")
+
+
 
 @auth.requires_login()
 def myquestions():
@@ -211,6 +215,14 @@ def managequestions():
     grid = SQLFORM.smartgrid(db.question,linked_tables=['question'])
     return dict(grid=grid)
     
+
+def reviews():
+    response.flash="Hello"
+#     response.flash=BEAUTIFY(request.vars.id)
+    image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
+    form=SQLFORM(db.review)
+    form.vars.question_id=image.id
+    return dict(form=form)
 
 def user():
     """

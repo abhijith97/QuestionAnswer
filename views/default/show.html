@@ -269,7 +269,23 @@ body {
 <h3>{{=image.body}}</h3>
     </div>
 </div>
-
+{{if len(views):}}
+<div>Expert's Review:
+<div>
+    {{for view in views:}}
+    <div>
+        {{=view.view}}
+    </div>
+    <div>
+        {{if view.sensible:}}
+        Sensible
+        {{else:}}
+        Nonsense
+        {{pass}}
+    </div>
+    {{pass}}
+    </div></div>
+{{pass}}
 
 {{if len(commentss):}}
 <div class="comments-container">

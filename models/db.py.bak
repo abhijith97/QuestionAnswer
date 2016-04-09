@@ -130,13 +130,8 @@ db.define_table('question',
    Field('author'),
    Field('email'),
    Field('body', 'text'),
-   Field('anonymous', 'boolean'),             
+   Field('anonymous', 'boolean'),
    Field('timestamp','datetime',default=request.now))
-
-
-
-
-
 
 db.define_table('answer',
    Field('question_id', 'reference question'),
@@ -146,6 +141,11 @@ db.define_table('answer',
    Field('body', 'text'),
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
+
+db.define_table('review',
+                Field('question_id','reference question'),
+                Field('view','text'),
+                Field('sensible','boolean'))
 
 db.define_table('likes',
                Field('question_id','reference question'),
