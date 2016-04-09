@@ -43,11 +43,22 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
+    
+    usr=db1(db1.auth_user.email==auth.user.email).select().first()
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
         new_ans=int(image.no_ans)+1
         image.no_ans=new_ans
         image.update_record()
+        
+        
+#         ans=int(usr.no_ans)+1
+#         usr.no_ans=ans
+#         usr.update_record()
+#         response.flash(usr.no_ans)
+        
+        
+        
     commentss = db(db.answer.question_id==image.id).select()
 #     likess=db((db.likes.post_id==image.id) & (db.likes.liker==auth.user.email)).count()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
@@ -73,14 +84,17 @@ def search():
     db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
     db.question.body.writable = db.question.body.readable = False
     db.question.file.writable= db.question.file.readable= False
+    db.question.anonymous.writable= db.question.anonymous.readable= False
     form=SQLFORM(db.question)
     title=request.vars.title
-    
-    images=db(db.question.title==title).select()
-    
-    
+    if title:
+        tit='%'+str(title)+'%'
+        images=db(db.question.title.like(tit, case_sensitive=False)).select()
 
-    return dict(form=form, images=images)
+        return dict(form=form, images=images)
+
+    else:
+        return dict(form = form, images="")
 
 @auth.requires_login()
 def myquestions():
@@ -129,7 +143,6 @@ def like():
 @auth.requires_login()
 def dislike():
     image = db(db.answer.id==request.vars.id).select().first()
-    response.flash=image.question_id
     ques=db(db.question.id==image.question_id).select().first()
     liked=db((db.likes.ans_id==image.id) & (db.likes.liker==auth.user.email)).select().first()
    

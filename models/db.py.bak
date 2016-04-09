@@ -64,6 +64,8 @@ db1.define_table(
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,readable=False, label='Password'), #required
     Field('phone'),
+    Field('badge', default="bronze"),
+    Field('no_ans', default=0),
     Field('registration_key', length=512,                # required
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,              # required
@@ -126,7 +128,7 @@ db.define_table('question',
    Field('author'),
    Field('email'),
    Field('body', 'text'),
-   Field('anonymous', 'boolean')             
+   Field('anonymous', 'boolean'),             
    Field('timestamp','datetime',default=request.now))
 
 

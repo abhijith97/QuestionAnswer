@@ -64,12 +64,16 @@ db1.define_table(
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,readable=False, label='Password'), #required
     Field('phone'),
+    Field('badge', default="bronze"),
+    Field('no_ans', default=0),
     Field('registration_key', length=512,                # required
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,              # required
           writable=False, readable=False, default=''),
     Field('registration_id', length=512,                 # required
           writable=False, readable=False, default=''))
+
+
 
 custom_auth_table = db1[auth.settings.table_user_name] # get the custom_auth_table
 custom_auth_table.first_name.requires =   IS_NOT_EMPTY(error_message=auth.messages.is_empty)
