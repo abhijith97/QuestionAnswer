@@ -250,7 +250,11 @@ body {
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
 <h1 class="page-header">{{=image.title}}</h1>
+<<<<<<< HEAD
 {{if image.anonymous==True:}}
+=======
+{{if image.anonymous==true:}
+>>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 <h3>Uploaded by: Anonymous</h3>
 {{else:}}
 <h3>Uploaded by: {{=image.author}}</h3>
