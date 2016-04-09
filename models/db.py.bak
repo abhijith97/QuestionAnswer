@@ -129,6 +129,11 @@ db.define_table('question',
    Field('timestamp','datetime',default=request.now),
    format = '%(title)s')
 
+
+db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
+
+
+
 db.define_table('answer',
    Field('question_id', 'reference question'),
    Field('file', 'upload'),

@@ -129,6 +129,11 @@ db.define_table('question',
    Field('timestamp','datetime',default=request.now),
    format = '%(title)s')
 
+
+
+
+
+
 db.define_table('answer',
    Field('question_id', 'reference question'),
    Field('file', 'upload'),

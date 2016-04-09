@@ -65,6 +65,16 @@ def uploadpage():
         redirect(URL('default','homepage'))
     return dict(form=form)
 
+
+@auth.requires_login()
+def search():
+    db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
+    db.question.body.writable = db.question.body.readable = False
+    db.question.file.writable= db.question.file.readable= False
+    form=SQLFORM(db.question)
+
+    return dict(form=form)
+
 @auth.requires_login()
 def myquestions():
     
