@@ -158,6 +158,7 @@ db.define_table('stars',
                 Field('question_id','reference question'),
                 Field('user'))
 
+
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
 db.question.author.writable = db.question.author.readable = False

@@ -74,6 +74,9 @@ def show():
             usr.update_record()
         else:
             db.userdata.insert(email=auth.user.email,noofans=1,badge="Newbie")
+
+            
+            
     usr=db(db.userdata.email==auth.user.email).select().first()
     commentss = db(db.answer.question_id==image.id).select()
     views=db(db.review.question_id==image.id).select()
