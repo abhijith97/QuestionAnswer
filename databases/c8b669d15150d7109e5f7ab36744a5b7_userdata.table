@@ -53,11 +53,10 @@ p17
 sg9
 I00
 sg10
-S'id'
-p18
+g15
 ssS'email'
-p19
-(dp20
+p18
+(dp19
 g4
 I512
 sg5
@@ -66,7 +65,7 @@ sg6
 I2
 sg7
 S'CHAR(512)'
-p21
+p20
 sg9
 I00
 sg10
