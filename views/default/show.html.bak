@@ -248,6 +248,14 @@ body {
 </style>
 
 <form><input type="hidden" id="id" name="id" value="" /></form>
+
+{{if starss:}}
+    <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star" style="font-size:24px"></i></button>
+{{else:}}
+    <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star-o" style="font-size:24px"></i></button>
+{{pass}}
+<div id="temp"></div>
+
 <h3>
     Tags:
 </h3>
@@ -294,7 +302,6 @@ body {
 {{if len(commentss):}}
 <div class="comments-container">
         <h1>Answers</h1>
-
         <ul id="comments-list" class="comments-list">
                       {{for posts in commentss:}}
             <li>
@@ -308,7 +315,9 @@ body {
                                 {{if usr.badge=="Gold":}}
                                     <img style="width:20px" src="../../static/images/gold.jpeg"/>
                                 {{elif usr.badge=="Silver":}}
+
                                     <img style="width:20px" src="../../static/images/silver.jpeg"/>
+
                                 {{elif usr.badge=="Bronze":}}
                                     <img style="width:20px" src="../../static/images/bronze.jpeg"/>
                                 {{pass}}
@@ -316,7 +325,6 @@ body {
                         </div>
                         <div class="comment-content">
                            {{=posts.body}}
-
                         </div>
                         {{flag=0}}
                         {{for i in likess:}}
@@ -395,6 +403,22 @@ body {
         else if(document.getElementById(id2).innerHTML=='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
         {
             document.getElementById(id2).innerHTML='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+    }
+    function star(idno)
+    {
+        jQuery('#id').val(idno);
+        ajax('{{=URL('default', 'star')}}', ['id'], temp);
+    }
+    function change()
+    {
+        if(document.getElementById("starring").innerHTML=='<i class="fa fa-star" style="font-size:24px"></i>')
+        {
+            document.getElementById("starring").innerHTML='<i class="fa fa-star-o" style="font-size:24px"></i>'
+        }
+        else if(document.getElementById("starring").innerHTML=='<i class="fa fa-star-o" style="font-size:24px"></i>')
+        {
+            document.getElementById("starring").innerHTML='<i class="fa fa-star" style="font-size:24px"></i>'
         }
     }
 </script>

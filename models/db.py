@@ -154,6 +154,9 @@ db.define_table('userdata',
                 Field('noofans'),
                 Field('badge'))
 
+db.define_table('stars',
+                Field('question_id','reference question'),
+                Field('user'))
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()

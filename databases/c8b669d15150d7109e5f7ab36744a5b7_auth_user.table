@@ -38,6 +38,7 @@ sg9
 I00
 sg10
 g11
+<<<<<<< HEAD
 ssS'noofans'
 p15
 (dp16
@@ -64,11 +65,17 @@ p24
 ssS'registration_key'
 p25
 (dp26
+=======
+ssS'phone'
+p15
+(dp16
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 g4
 I512
 sg5
 I00
 sg6
+<<<<<<< HEAD
 I7
 sg7
 S'CHAR(512)'
@@ -89,13 +96,24 @@ I8
 sg7
 S'CHAR(512)'
 p30
+=======
+I6
+sg7
+S'CHAR(512)'
+p17
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 sg9
 I00
 sg10
 g11
 ssS'registration_id'
+<<<<<<< HEAD
 p31
 (dp32
+=======
+p18
+(dp19
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 g4
 I512
 sg5
@@ -104,20 +122,26 @@ sg6
 I9
 sg7
 S'CHAR(512)'
-p33
+p20
 sg9
 I00
 sg10
 g11
 ssS'id'
+<<<<<<< HEAD
 p34
 (dp35
+=======
+p21
+(dp22
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 g4
 I512
 sg5
 I00
 sg6
 I1
+<<<<<<< HEAD
 sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
 p36
@@ -145,22 +169,45 @@ g11
 ssS'email'
 p41
 (dp42
-g4
-I128
-sg5
-I01
-sg6
-I4
+=======
 sg7
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
+p23
+sg9
+I00
+sg10
+S'id'
+p24
+ssS'reset_password_key'
+p25
+(dp26
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
+g4
+I512
+sg5
+I00
+sg6
+I8
+sg7
+<<<<<<< HEAD
 S'CHAR(128) UNIQUE'
 p43
+=======
+S'CHAR(512)'
+p27
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 sg9
 I00
 sg10
 g11
 ssS'password'
+<<<<<<< HEAD
 p44
 (dp45
+=======
+p28
+(dp29
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 g4
 I512
 sg5
@@ -169,11 +216,16 @@ sg6
 I5
 sg7
 S'CHAR(512)'
+<<<<<<< HEAD
 p46
+=======
+p30
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 sg9
 I00
 sg10
 S'password'
+<<<<<<< HEAD
 p47
 ssS'badge'
 p48
@@ -187,10 +239,18 @@ S'CHAR(512)'
 p52
 sS'length'
 p53
+=======
+p31
+ssS'registration_key'
+p32
+(dp33
+g4
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 I512
 sS'notnull'
 p54
 I00
+<<<<<<< HEAD
 sS'unique'
 p55
 I00
@@ -214,4 +274,31 @@ sg55
 I00
 sg56
 g57
+=======
+sg6
+I7
+sg7
+S'CHAR(512)'
+p34
+sg9
+I00
+sg10
+g11
+ssS'email'
+p35
+(dp36
+g4
+I128
+sg5
+I01
+sg6
+I4
+sg7
+S'CHAR(128) UNIQUE'
+p37
+sg9
+I00
+sg10
+g11
+>>>>>>> a51433e92d1b56e3c203ad553373799ead337d7b
 ss.

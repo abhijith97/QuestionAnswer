@@ -58,12 +58,11 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
-    
 
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
-        new_ans=int(image.no_ans)+1
-        image.no_ans=new_ans
+        new_ans=int(image.noofans)+1
+        image.noofans=new_ans
         image.update_record()
         usr=db(db.userdata.email==auth.user.email).select().first()
         if usr:
@@ -76,13 +75,14 @@ def show():
             elif ans>=15:
                 usr.badge="Gold"
             usr.update_record()
-
         else:
             db.userdata.insert(email=auth.user.email,noofans=1,badge="Newbie")
     usr=db(db.userdata.email==auth.user.email).select().first()
     commentss = db(db.answer.question_id==image.id).select()
     views=db(db.review.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
+    starss=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).select()
+    return dict(image=image, commentss=commentss, likess=likess, starss=starss, views=views, usr=usr, form=form)
     return dict(image=image, commentss=commentss, likess=likess, views=views, usr=usr, form=form)
 
 @auth.requires_login()
@@ -100,9 +100,6 @@ def uploadpage():
 
 @auth.requires_login()
 def search():
-
-
-    
     dropdown=request.vars.dropdown
     textbox=request.vars.textbox
     tit='%'+str(textbox)+'%'
@@ -114,6 +111,7 @@ def search():
         images=db(db.question.body.like(tit, case_sensitive=False)).select(db.question.ALL, orderby=~db.question.timestamp)
         
     else:
+
         images=db(db.question.author.like(tit, case_sensitive=False)).select(db.question.ALL, orderby=~db.question.timestamp)
         
     
@@ -131,6 +129,9 @@ def search():
 
 #     else:
 #         return dict(form = form, images="")
+
+
+
     if images:
         return dict(images=images)
     else:
@@ -151,6 +152,24 @@ def myquestions():
     forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(rows), totalrecs)
     return dict(rows=rows,backward=backward,forward=forward, nav=nav)
+
+@auth.requires_login()
+def mystarredquestions():
+    
+    totalrecs = db(db.stars.user==auth.user.email).count()  # number of records in table (for example)
+    showlines = 5    # number of records per page
+
+    if len(request.args):
+       page=int(request.args[0])
+    else:
+       page=0
+    listofques=db(db.stars.user==auth.user.email)._select(db.stars.question_id)
+    rows=db(db.question.id>0 and db.question.id.belongs(listofques)).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
+    forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(rows), totalrecs)
+    return dict(rows=rows,backward=backward,forward=forward, nav=nav)
+
 
 @auth.requires_login()
 def like():
@@ -206,6 +225,19 @@ def dislike():
         image.update_record()
         db.likes.insert(question_id=ques.id,ans_id=image.id,liker=auth.user.email,upordown=-1)
     return str(image.likes)+" Likes"
+
+@auth.requires_login()
+def star():
+#     response.flash=BEAUTIFY(request.vars)
+    image = db(db.question.id==request.vars.id).select().first()
+    starred=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).count()
+    if starred==0:
+        db.stars.insert(question_id=image.id,user=auth.user.email)
+        response.flash="Starred"
+    else:
+        response.flash="Unstarred"
+        db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).delete()
+    return ""
 
 @auth.requires_login()
 def edit():

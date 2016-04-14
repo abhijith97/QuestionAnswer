@@ -17,17 +17,21 @@
 <div class="table-responsive">
     <table class="table table-hover">
     <tr>
+
         <th>Tags</th>
+
         <th>Description</th>
         <th>Changes</th>
     </tr>
     {{for image in rows:}}
     <tr>
+
          <td>{{for i in image.title:}}
             <span>-{{=i}}-</span>
             {{pass}}
         </td>
         <td>{{=A(image.body,_href=URL("show",args=image.id))}}</td>
+
         <td>{{=A(BUTTON("Edit"), _href=URL("edit", args=image.id))}}
         <button id="del" class="btn btn-primary" onclick="delt({{=image.id}})">Delete</button></td>
     </tr>
