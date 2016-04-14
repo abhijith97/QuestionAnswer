@@ -1,3 +1,44 @@
 {{extend 'layout.html'}}
-<h1>This is the default/myquestions.html template</h1>
-{{=BEAUTIFY(response._vars)}}
+
+<form><input type="hidden" id="id" name="id" value="" /></form>
+<script>
+    function delt(idno)
+    {
+        var x=confirm("Are you sure?");
+        if(x==true)
+        {       
+            jQuery('#id').val(idno);
+            ajax('{{=URL('default', 'dele')}}', ['id'], 'del');
+        }
+    }
+</script>
+{{if len(rows):}}
+    <h1>My Questions</h1>
+<div class="table-responsive">
+    <table class="table table-hover">
+    <tr>
+        <th>Tags</th>
+        <th>Description</th>
+        <th>Changes</th>
+    </tr>
+    {{for image in rows:}}
+    <tr>
+         <td>{{for i in image.title:}}
+            <span>-{{=i}}-</span>
+            {{pass}}
+        </td>
+        <td>{{=A(image.body,_href=URL("show",args=image.id))}}</td>
+        <td>{{=A(BUTTON("Edit"), _href=URL("edit", args=image.id))}}
+        <button id="del" class="btn btn-primary" onclick="delt({{=image.id}})">Delete</button></td>
+    </tr>
+    {{pass}}
+    </table>
+</div>
+   {{=backward}}
+    {{=forward}}
+    {{=nav}}
+
+{{else:}}
+    <h1>No recipes uploaded by you!!</h1>
+{{pass}}
+{{include 'web2py_ajax.html'}}

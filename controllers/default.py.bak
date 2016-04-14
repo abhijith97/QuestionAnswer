@@ -105,13 +105,16 @@ def search():
     
     dropdown=request.vars.dropdown
     textbox=request.vars.textbox
-    
+    tit='%'+str(textbox)+'%'
     if(dropdown=="Title"):
-        images=db(db.question.title == textbox).select()
+        
+        images=db(db.question.title.like(tit, case_sensitive=False)).select(db.question.ALL, orderby=~db.question.timestamp)
     elif(dropdown=="Description"):
-        images=db(db.question.body == textbox).select()
+        
+        images=db(db.question.body.like(tit, case_sensitive=False)).select(db.question.ALL, orderby=~db.question.timestamp)
+        
     else:
-        images=db(db.question.author == textbox).select()
+        images=db(db.question.author.like(tit, case_sensitive=False)).select(db.question.ALL, orderby=~db.question.timestamp)
         
     
 #     db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
