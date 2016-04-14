@@ -151,7 +151,12 @@ db.define_table('likes',
 
 db.define_table('userdata',
                 Field('email'),
-                Field('noofans'))
+                Field('noofans'),
+                Field('badge'))
+
+db.define_table('stars',
+                Field('question_id','reference question'),
+                Field('user'))
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()

@@ -250,6 +250,13 @@ body {
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
 <h1 class="page-header">{{=image.title}}</h1>
+
+{{if starss:}}
+    <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star" style="font-size:24px"></i></button>
+{{else:}}
+    <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star-o" style="font-size:24px"></i></button>
+{{pass}}
+<div id="temp"></div>
 {{if image.anonymous==True:}}
 <h3>Uploaded by: Anonymous</h3>
 {{else:}}
@@ -290,7 +297,6 @@ body {
 {{if len(commentss):}}
 <div class="comments-container">
         <h1>Answers</h1>
-
         <ul id="comments-list" class="comments-list">
                       {{for posts in commentss:}}
             <li>
@@ -304,15 +310,14 @@ body {
                                 {{if usr.badge=="Gold":}}
                                     <img style="width:10px" src="../../static/images/gold.jpeg"/>
                                 {{elif usr.badge=="Silver":}}
-                                    <img src="../../static/images/silver.jpeg"/>
+                                    <img style="width:15px" src="../../static/images/silver.jpeg"/>
                                 {{elif usr.badge=="Bronze":}}
-                                    <img src="../../static/images/bronze.jpeg"/>
+                                    <img style="width:10px" src="../../static/images/bronze.jpeg"/>
                                 {{pass}}
                             </h6>
                         </div>
                         <div class="comment-content">
                            {{=posts.body}}
-
                         </div>
                         {{flag=0}}
                         {{for i in likess:}}
@@ -391,6 +396,22 @@ body {
         else if(document.getElementById(id2).innerHTML=='DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i>')
         {
             document.getElementById(id2).innerHTML='DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i>'
+        }
+    }
+    function star(idno)
+    {
+        jQuery('#id').val(idno);
+        ajax('{{=URL('default', 'star')}}', ['id'], temp);
+    }
+    function change()
+    {
+        if(document.getElementById("starring").innerHTML=='<i class="fa fa-star" style="font-size:24px"></i>')
+        {
+            document.getElementById("starring").innerHTML='<i class="fa fa-star-o" style="font-size:24px"></i>'
+        }
+        else if(document.getElementById("starring").innerHTML=='<i class="fa fa-star-o" style="font-size:24px"></i>')
+        {
+            document.getElementById("starring").innerHTML='<i class="fa fa-star" style="font-size:24px"></i>'
         }
     }
 </script>

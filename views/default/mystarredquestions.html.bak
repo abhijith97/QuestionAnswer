@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+
+{{if len(rows):}}
+    <h1>My Questions</h1>
+    <div class="table-responsive">
+    <table class="table table-hover">
+    <tr>
+        <th>Title</th>
+        <th>Question</th>
+    </tr>
+    {{for image in rows:}}
+    <tr>
+        <td>{{=A(image.title,_href=URL("show",args=image.id))}}</td>
+        <td>{{=image.body}}</td>
+    </tr>
+    {{pass}}
+    </table>
+</div>
+   {{=backward}}
+    {{=forward}}
+    {{=nav}}
+
+{{else:}}
+    <h1>No questions starred by you!!</h1>
+{{pass}}
+{{include 'web2py_ajax.html'}}

@@ -28,14 +28,16 @@ if auth.has_membership('Expert'):
     (T('Questions'), False, URL('default', 'expert_homepage'), []),
     (T('Ask'), False, URL('default', 'uploadpage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
+    (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), []),
     (T('Search'), False, URL('default', 'search'), [])]
 
 else:
     response.menu = [
-        (T('Questions'), False, URL('default', 'homepage'), []),
-        (T('Ask'), False, URL('default', 'uploadpage'), []),
-        (T('My Questions'), False, URL('default', 'myquestions'), []),
-        (T('Search'), False, URL('default', 'search'), [])]
+    (T('Questions'), False, URL('default', 'homepage'), []),
+    (T('Ask'), False, URL('default', 'uploadpage'), []),
+    (T('My Questions'), False, URL('default', 'myquestions'), []),
+    (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), []),
+    (T('Search'), False, URL('default', 'search'), [])]
 
 if auth.has_membership('user_7'):
     response.menu.append((T('Manage Questions'),False,URL('default','managequestions'),[]))
