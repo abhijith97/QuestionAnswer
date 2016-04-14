@@ -59,27 +59,31 @@ def show():
     form.vars.email=auth.user.email
     form.vars.likes=0
     
-    usr=db1(db1.auth_user.email==auth.user.email).select().first()
+
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
         new_ans=int(image.no_ans)+1
         image.no_ans=new_ans
         image.update_record()
-        
-        
-#         ans=int(usr.no_ans)+1
-#         usr.no_ans=ans
-#         usr.update_record()
-#         response.flash(usr.no_ans)
-        
-        
-        
+        usr=db(db.userdata.email==auth.user.email).select().first()
+        if usr:
+            ans=int(usr.noofans)+1
+            usr.noofans=ans
+            if ans>=5 and ans<10:
+                usr.badge="Bronze"
+            elif ans>=10 and ans<15:
+                usr.badge="Silver"
+            elif ans>=15:
+                usr.badge="Gold"
+            usr.update_record()
+
+        else:
+            db.userdata.insert(email=auth.user.email,noofans=1,badge="Newbie")
+    usr=db(db.userdata.email==auth.user.email).select().first()
     commentss = db(db.answer.question_id==image.id).select()
     views=db(db.review.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
-    return dict(image=image, commentss=commentss, likess=likess, views=views, form=form)
-
-
+    return dict(image=image, commentss=commentss, likess=likess, views=views, usr=usr, form=form)
 
 @auth.requires_login()
 def uploadpage():
@@ -96,24 +100,38 @@ def uploadpage():
 
 @auth.requires_login()
 def search():
-    db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
-    db.question.body.writable = db.question.body.readable = False
-    db.question.file.writable= db.question.file.readable= False
-    db.question.anonymous.writable= db.question.anonymous.readable= False
-    form=SQLFORM(db.question)
-    title=request.vars.title
+
 
     
-    images=db(db.question.title==title).select()
-    return dict(form=form, images=images)
-    if title:
-        tit='%'+str(title)+'%'
-        images=db(db.question.title.like(tit, case_sensitive=False)).select()
-
-        return dict(form=form, images=images)
-
+    dropdown=request.vars.dropdown
+    textbox=request.vars.textbox
+    
+    if(dropdown=="Title"):
+        images=db(db.question.title == textbox).select()
+    elif(dropdown=="Description"):
+        images=db(db.question.body == textbox).select()
     else:
-        return dict(form = form, images="")
+        images=db(db.question.author == textbox).select()
+        
+    
+#     db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
+#     db.question.body.writable = db.question.body.readable = False
+#     db.question.file.writable= db.question.file.readable= False
+#     db.question.anonymous.writable= db.question.anonymous.readable= False
+#     form=SQLFORM(db.question)
+#     title=request.vars.title
+#     
+#         tit='%'+str(title)+'%'
+#         images=db(db.question.title.like(tit, case_sensitive=False)).select()
+
+#         return dict(form=form, images=images)
+
+#     else:
+#         return dict(form = form, images="")
+    if images:
+        return dict(images=images)
+    else:
+        return dict(images="")
 
 @auth.requires_login()
 def myquestions():

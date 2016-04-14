@@ -250,11 +250,7 @@ body {
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
 <h1 class="page-header">{{=image.title}}</h1>
-<<<<<<< HEAD
 {{if image.anonymous==True:}}
-=======
-{{if image.anonymous==true:}
->>>>>>> 9637d9ef311105cb39fb2c30580099070175fa4b
 <h3>Uploaded by: Anonymous</h3>
 {{else:}}
 <h3>Uploaded by: {{=image.author}}</h3>
@@ -285,6 +281,7 @@ body {
         Sensible
         {{else:}}
         Nonsense
+        {{pass}}
     </div>
     {{pass}}
     </div></div>
@@ -303,7 +300,15 @@ body {
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">
                         <div class="comment-head">
-                            <h6 class="comment-name">{{=posts.author}}</h6>
+                            <h6 class="comment-name">{{=posts.author}} 
+                                {{if usr.badge=="Gold":}}
+                                    <img style="width:10px" src="../../static/images/gold.jpeg"/>
+                                {{elif usr.badge=="Silver":}}
+                                    <img src="../../static/images/silver.jpeg"/>
+                                {{elif usr.badge=="Bronze":}}
+                                    <img src="../../static/images/bronze.jpeg"/>
+                                {{pass}}
+                            </h6>
                         </div>
                         <div class="comment-content">
                            {{=posts.body}}

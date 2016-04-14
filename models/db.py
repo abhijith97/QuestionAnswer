@@ -149,6 +149,11 @@ db.define_table('likes',
                Field('liker'),
                Field('upordown'))
 
+db.define_table('userdata',
+                Field('email'),
+                Field('noofans'),
+                Field('badge'))
+
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
 db.question.author.writable = db.question.author.readable = False
@@ -167,3 +172,6 @@ db.answer.email.writable = db.answer.email.readable = False
 db.review.question_id.writable = db.review.question_id.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False
+
+db.userdata.email.writable=db.userdata.email.readable=False
+db.userdata.noofans.writable=db.userdata.noofans.readable=False

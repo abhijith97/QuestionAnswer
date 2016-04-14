@@ -64,7 +64,6 @@ db1.define_table(
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,readable=False, label='Password'), #required
     Field('phone'),
-    Field('noofans'),
     Field('registration_key', length=512,                # required
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,              # required
@@ -150,6 +149,10 @@ db.define_table('likes',
                Field('liker'),
                Field('upordown'))
 
+db.define_table('userdata',
+                Field('email'),
+                Field('noofans'))
+
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
 db.question.author.writable = db.question.author.readable = False
@@ -168,3 +171,6 @@ db.answer.email.writable = db.answer.email.readable = False
 db.review.question_id.writable = db.review.question_id.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False
+
+db.userdata.email.writable=db.userdata.email.readable=False
+db.userdata.noofans.writable=db.userdata.noofans.readable=False
