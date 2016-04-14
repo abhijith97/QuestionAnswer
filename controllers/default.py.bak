@@ -83,7 +83,7 @@ def show():
     commentss = db(db.answer.question_id==image.id).select()
     views=db(db.review.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
-    return dict(image=image, commentss=commentss, likess=likess, views=views, form=form)
+    return dict(image=image, commentss=commentss, likess=likess, views=views, usr=usr, form=form)
 
 @auth.requires_login()
 def uploadpage():

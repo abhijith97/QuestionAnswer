@@ -120,7 +120,7 @@ auth.settings.reset_password_requires_verification = True
 db = DAL("sqlite://storage.sqlite")
 
 db.define_table('question',
-   Field('title'),
+   Field('title', 'list:string'),
    Field('no_ans', default=0),
    Field('file', 'upload'),
    Field('author'),
@@ -153,6 +153,7 @@ db.define_table('userdata',
                 Field('email'),
                 Field('noofans'),
                 Field('badge'))
+
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
