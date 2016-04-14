@@ -11259,6 +11259,12 @@ success!
 success!
 success!
 success!
+timestamp: 2016-04-14T18:26:45.166619
+CREATE TABLE tags(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    question_id INTEGER REFERENCES question (id) ON DELETE CASCADE  ,
+    tag TEXT
+);
 success!
 success!
 success!

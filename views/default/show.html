@@ -249,14 +249,18 @@ body {
 
 <form><input type="hidden" id="id" name="id" value="" /></form>
 
-<h1 class="page-header">{{=image.title}}</h1>
-
 {{if starss:}}
     <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star" style="font-size:24px"></i></button>
 {{else:}}
     <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star-o" style="font-size:24px"></i></button>
 {{pass}}
 <div id="temp"></div>
+<h3>
+    Tags:
+</h3>
+{{for tag in image.title:}}
+<span style="font-weight:bold; font-size:120%; border-radius:8%;" class="text-primary bg-info">{{=tag}}</span>
+{{pass}}
 {{if image.anonymous==True:}}
 <h3>Uploaded by: Anonymous</h3>
 {{else:}}

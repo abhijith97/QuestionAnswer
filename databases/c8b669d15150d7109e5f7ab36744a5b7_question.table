@@ -99,15 +99,21 @@ I00
 sg6
 I2
 sg7
-S'CHAR(512)'
+S'TEXT'
 p29
 sg9
 I00
 sg10
+<<<<<<< HEAD
 g15
 ssS'email'
+=======
+S'list:string'
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 p30
-(dp31
+ssS'email'
+p31
+(dp32
 g4
 I512
 sg5
@@ -116,7 +122,11 @@ sg6
 I6
 sg7
 S'CHAR(512)'
+<<<<<<< HEAD
 p32
+=======
+p33
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 sg9
 I00
 sg10
@@ -146,7 +156,13 @@ S'string'
 p42
 ssS'file'
 p43
+<<<<<<< HEAD
 (dp44
+=======
+ssS'file'
+p44
+(dp45
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 g4
 I512
 sg5
@@ -155,15 +171,26 @@ sg6
 I4
 sg7
 S'CHAR(512)'
+<<<<<<< HEAD
 p45
+=======
+p46
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 sg9
 I00
 sg10
 S'upload'
+<<<<<<< HEAD
 p46
 ssS'id'
 p47
 (dp48
+=======
+p47
+ssS'id'
+p48
+(dp49
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 g4
 I512
 sg5
@@ -172,10 +199,18 @@ sg6
 I1
 sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
+<<<<<<< HEAD
 p49
+=======
+p50
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 sg9
 I00
 sg10
 S'id'
+<<<<<<< HEAD
 p50
+=======
+p51
+>>>>>>> 93309319231b2dc5b6b643a27e9fffb372d93613
 ss.
