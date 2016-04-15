@@ -74,12 +74,10 @@ def show():
             usr.update_record()
         else:
             db.userdata.insert(email=auth.user.email,noofans=1,badge="Newbie")
-
-            
             
     usr=db(db.userdata.email==auth.user.email).select().first()
     commentss = db(db.answer.question_id==image.id).select()
-    views=db(db.review.question_id==image.id).select()
+    views=db(db.expreview.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
     starss=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).select()
     return dict(image=image, commentss=commentss, likess=likess, starss=starss, views=views, usr=usr, form=form)
@@ -112,22 +110,6 @@ def search():
     else:
 
         images=db(db.question.author.like(tit, case_sensitive=False)).select(db.question.ALL, orderby=~db.question.timestamp)
-        
-    
-#     db.question.title.widget = SQLFORM.widgets.autocomplete(request, db.question.title , limitby=(0,10), min_length=2)
-#     db.question.body.writable = db.question.body.readable = False
-#     db.question.file.writable= db.question.file.readable= False
-#     db.question.anonymous.writable= db.question.anonymous.readable= False
-#     form=SQLFORM(db.question)
-#     title=request.vars.title
-#     
-#         tit='%'+str(title)+'%'
-#         images=db(db.question.title.like(tit, case_sensitive=False)).select()
-
-#         return dict(form=form, images=images)
-
-#     else:
-#         return dict(form = form, images="")
 
     if images:
         return dict(images=images)
@@ -268,7 +250,7 @@ def reviews():
     response.flash="Hello"
 #     response.flash=BEAUTIFY(request.vars.id)
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
-    form=SQLFORM(db.review)
+    form=SQLFORM(db.expreview)
     form.vars.question_id=image.id
     if form.process().accepted:
         response.flash="Your review is added"

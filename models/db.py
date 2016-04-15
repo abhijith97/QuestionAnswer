@@ -138,7 +138,7 @@ db.define_table('answer',
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
 
-db.define_table('review',
+db.define_table('expreview',
                 Field('question_id','reference question'),
                 Field('view','text'),
                 Field('sensible','boolean'))
@@ -174,7 +174,7 @@ db.answer.likes.writable = db.answer.likes.readable = False
 db.answer.timestamp.writable = db.answer.timestamp.readable = False
 db.answer.email.writable = db.answer.email.readable = False
 
-db.review.question_id.writable = db.review.question_id.readable = False
+db.expreview.question_id.writable = db.expreview.question_id.readable = False
 
 db.likes.liker.readable=db.likes.liker.writable=False
 
