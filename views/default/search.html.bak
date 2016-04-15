@@ -1,17 +1,29 @@
 {{extend 'layout.html'}}
+<style>
+
+.suggestions { background: white; border: solid 1px #55A6C8; }
+.suggestions div { padding: 2px 4px 2px 4px; }
+</style>
+
+
 <h1>Search</h1>
 
 
 <form action="" method="post">
 
-<input  name="textbox" type="textbox">
-<select name="dropdown">
+<input name="textbox" type="text" id="tb" onkeyup="autoc1()" list="datalist1" autocomplete="off">
+
+<select name="dropdown" id="dd">
 <option value="Title" selected>Title</option>
 <option value="Description">Description</option>
 <option value="Author">Author</option>
 </select>
 <input type="submit" value="Submit" />
 <br><br>
+    <datalist id="datalist1">
+
+</datalist>
+    <div id="status"></div>
 {{if len(images):}}
 <div class="table-responsive">
     <table class="table table-hover">
@@ -39,3 +51,36 @@
     </table>
 </div>
 {{pass}}
+    
+<script>
+    
+
+      
+    
+    function autoc1()
+    {
+
+    xhr=new XMLHttpRequest();
+    xhr.open("POST", '{{=URL('default','autoc')}}', true);
+    
+    type=document.getElementById("dd").value;
+    text=document.getElementById("tb").value;
+//     val="text="+text+"&type="+type;
+    val=JSON.stringify({"text":text, "type":type});
+//     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function() {
+
+
+						    	    if(xhr.readyState == 4 && xhr.status == 200) {
+								    		    var return_data = xhr.responseText;
+										    	document.getElementById("datalist1").innerHTML = return_data;
+                                        }
+    };
+    
+
+    xhr.send(val);
+    
+    };
+
+</script>

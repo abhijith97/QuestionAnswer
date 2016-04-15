@@ -256,6 +256,32 @@ def reviews():
         response.flash="Your review is added"
     return dict(form=form)
 
+
+def autoc():
+    text=request.post_vars.text
+    type=request.post_vars.type
+    tit=str(text)+'%';
+    
+    if(type=="Title"):
+        images=db(db.question.title.like(tit, case_sensitive=False)).select(distinct=True)
+#         if(len(images)==0):
+#             images=["Abhi"]
+        a=["<option value="+image.title+">" for image in images]
+    elif(type=="Description"):
+
+        images=db(db.question.body.like(tit, case_sensitive=False)).select(distinct=True)
+#         if(len(images)==0):
+#             images=["Abhi"]
+        a=["<option value="+image.body+">" for image in images]
+    else:
+        images=db(db.question.author.like(tit, case_sensitive=False)).select(distinct=True)
+#         if(len(images)==0):
+#             images=["Abhi"]
+        a=["<option value=\""+image.author+"\">" for image in images]
+    if(len(a)==0):
+        a=""
+    return a
+
 def user():
     """
     exposes:

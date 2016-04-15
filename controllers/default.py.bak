@@ -77,7 +77,7 @@ def show():
             
     usr=db(db.userdata.email==auth.user.email).select().first()
     commentss = db(db.answer.question_id==image.id).select()
-    views=db(db.review.question_id==image.id).select()
+    views=db(db.expreview.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
     starss=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).select()
     return dict(image=image, commentss=commentss, likess=likess, starss=starss, views=views, usr=usr, form=form)
@@ -255,6 +255,32 @@ def reviews():
     if form.process().accepted:
         response.flash="Your review is added"
     return dict(form=form)
+
+
+def autoc():
+    text=request.post_vars.text
+    type=request.post_vars.type
+    tit=str(text)+'%';
+    
+    if(type=="Title"):
+        images=db(db.question.title.like(tit, case_sensitive=False)).select(distinct=True)
+#         if(len(images)==0):
+#             images=["Abhi"]
+        a=["<option value="+image.title+">" for image in images]
+    elif(type=="Description"):
+
+        images=db(db.question.body.like(tit, case_sensitive=False)).select(distinct=True)
+#         if(len(images)==0):
+#             images=["Abhi"]
+        a=["<option value="+image.body+">" for image in images]
+    else:
+        images=db(db.question.author.like(tit, case_sensitive=False)).select(distinct=True)
+#         if(len(images)==0):
+#             images=["Abhi"]
+        a=["<option value=\""+image.author+"\">" for image in images]
+    if(len(a)==0):
+        a=""
+    return a
 
 def user():
     """
