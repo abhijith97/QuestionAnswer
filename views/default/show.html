@@ -27,7 +27,8 @@ ul {
 
 body {
     font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
-    background: #dee1e3;
+    background-image:url("../../static/images/pp.jpg");
+    background-size:100% 100%;
 }
 
 /** ====================
@@ -248,12 +249,13 @@ body {
 </style>
 
 <form><input type="hidden" id="id" name="id" value="" /></form>
-
+<div style="text-align:right;">
 {{if starss:}}
     <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star" style="font-size:24px"></i></button>
 {{else:}}
     <button id="starring" onclick="star('{{=image.id}}'); change();"><i class="fa fa-star-o" style="font-size:24px"></i></button>
 {{pass}}
+</div>
 <div id="temp"></div>
 <h3>
     Tags:
@@ -262,14 +264,11 @@ body {
 <span style="font-weight:bold; font-size:120%; border-radius:8%;" class="text-primary bg-info">{{=tag}}</span>
 {{pass}}
 {{if image.anonymous==True:}}
-<h3>Uploaded by: Anonymous</h3>
+<h3>Asked by: Anonymous</h3>
 {{else:}}
-<h3>Uploaded by: {{=image.author}}</h3>
-{{pass}}
-<small>{{=image.timestamp.date()}}</small>
 {{if image.file:}}
 <div style="text-align:center">
-<img width="500px"
+<img class="img-responsive img-rounded" width="500px"
      src="{{=URL('download', args=image.file)}}" />
 </div>
 {{pass}}
@@ -280,22 +279,25 @@ body {
 <h3>{{=image.body}}</h3>
     </div>
 </div>
+<h3>Asked by: {{=image.author}}</h3>
+{{pass}}
+<small>{{=image.timestamp.date()}}</small>
+
 {{if len(views):}}
-<div>Expert's Review:
+
 <div>
     {{for view in views:}}
-    <div>
-        {{=view.view}}
-    </div>
-    <div>
-        {{if view.sensible:}}
-        Sensible
-        {{else:}}
-        Nonsense
-        {{pass}}
+    <div class="container">
+        <h3>
+            Review
+        </h3>
+        <blockquote class="blockquote">
+            {{=view.view}}
+            <footer>Expert</footer>
+        </blockquote>
     </div>
     {{pass}}
-    </div></div>
+    </div>
 {{pass}}
 
 {{if len(commentss):}}
@@ -317,30 +319,38 @@ body {
                                     <img style="width:20px" src="../../static/images/silver.jpeg"/>
                                 {{elif usr.badge=="Bronze":}}
                                     <img style="width:20px" src="../../static/images/bronze.jpeg"/>
-
+                                {{else:}}
+                                    <img style="width:20px" src="../../static/images/newbie.jpeg"/>
                                 {{pass}}
                             </h6>
                         </div>
                         <div class="comment-content">
                            {{=posts.body}}
+
+                        {{if posts.file:}}
+                        <div style="text-align:center">
+                        <img class="img-responsive img-rounded" width="300px"
+                             src="{{=URL('download', args=posts.file)}}" />
+                        </div>
+                        {{pass}}
                         </div>
                         {{flag=0}}
                         {{for i in likess:}}
                             {{if i.ans_id==posts.id and int(i.upordown)==1:}}
                                 {{flag=1}}
-                                <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
-                                <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                                <button class="label label-success" id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTED  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                                <button class="label label-danger" id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
                             {{elif i.ans_id==posts.id and int(i.upordown)==-1:}}
-                            <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
-                            <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                            <button class="label label-success" id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                            <button class="label label-danger" id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTED  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
                         {{flag=1}}
                         {{pass}}
                         {{pass}}
                         {{if flag==0:}}
-                         <button id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
-                         <button id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
+                         <button class="label label-success" id="{{=posts.id}}likepic" onclick="up('{{=posts.id}}'); change1('{{=posts.id}}');">UPVOTE  <i class="fa fa-thumbs-up" style="font-size:24px"></i></button>
+                         <button class="label label-danger" id="{{=posts.id}}dislikepic" onclick="down('{{=posts.id}}'); change2('{{=posts.id}}');">DOWNVOTE  <i class="fa fa-thumbs-down" style="font-size:24px"></i></button>
                         {{pass}}
-                        <span id="{{=posts.id}}">{{=posts.likes}} Likes</span>
+                        <span id="{{=posts.id}}" class="badge" style="background-color:black;">{{=posts.likes}}</span>
                     </div>
                 </div>
             </li>

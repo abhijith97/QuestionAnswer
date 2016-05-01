@@ -1,36 +1,81 @@
 {{extend 'layout.html'}}
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+    html,body
+    {
+        height:100%;
+    }
+  .carousel-inner > .item > img, .carousel-inner > .item > a > img
+    {
+      width: 70%;
+      margin: auto;
+  }
+  </style>
 
-{{block header}}
-    <header class="container-fluid background" style="margin:0px">
-        <br>
-      <div class="jumbotron text-center">
-        
-        <h1 style="font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;">Learn2Cook</h1><br><br>
-          <h3 style="color:white">Quick Recipes, Easy Meal Ideas!</h3>
-        {{pass}}
+<div class="container" style="height:700px;">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:100%;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators" style="height:100%;">
+      <li data-target="#myCarousel" data-slide-to="0" class="active" style="width:100%;height:100%;"></li>
+      <li data-target="#myCarousel" data-slide-to="1" style="width:100%;height:100%;"></li>
+      <li data-target="#myCarousel" data-slide-to="2" style="width:100%;height:100%;"></li>
+      <li data-target="#myCarousel" data-slide-to="3" style="width:100%;height:100%;"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <img src="1.jpg" alt="1" width="90%" height="50%">
+        <div class="carousel-caption">
+          <h3>{{=A("ASK!",_href=URL("uploadpage"))}}</h3>
+          <p>Ask your heart out! You can even be anonymous here. So grab the opportunity!</p>
+        </div>
       </div>
-        <br><br>
-    </header>
-{{end}}
-<div id="one">
+
+      <div class="item">
+        <img src="2.jpg" alt="2" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>{{=A("READ!",_href=URL("homepage"))}}</h3>
+          <p>Read others' questions and the answers!</p>
+        </div>
+      </div>
     
+      <div class="item">
+        <img src="3.jpg" alt="3" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>{{=A("My Questions!",_href=URL("myquestions"))}}</h3>
+          <p>Your asked questions!</p>
+        </div>
+      </div>
 
-{{if 'message' in globals():}}
-<h2>{{=message}}</h2>
-<p class="lead">{{=T('The one-stop destination for people who love cooking!')}}</p>
-<ul>
-  <li>{{=T('Upload your recipes.')}}</li>
-    <br>
-  <li>{{=T('Learn new ones.')}}</li><br>
-  <li>{{=T('Comment')}}</li>
-    <h3>
-        
-       {{=T('And much more!')}} </h3>
+      <div class="item">
+        <img src="4.jpg" alt="4" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>{{=A("Favourites!",_href=URL("mystarredquestions"))}}</h3>
+          <p>Your own favourite questions!</p>
+        </div>
+      </div>
+  <div class="item">
+        <img src="5.jpg" alt="5" width="460" height="345">
+        <div class="carousel-caption">
+          <h3>Search</h3>
+          <p>Search questions based on the tags,the question and the author!</p>
+        </div>
+      </div>
+    </div>
 
-</ul>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 </div>
-{{elif 'content' in globals():}}
-{{=content}}
-{{else:}}
-{{=BEAUTIFY(response._vars)}}
-{{pass}}

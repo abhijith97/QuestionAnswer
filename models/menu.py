@@ -25,18 +25,20 @@ response.google_analytics_id = None
 #########################################################################
 if auth.has_membership('Expert'):
     response.menu = [
-    (T('Questions'), False, URL('default', 'expert_homepage'), []),
     (T('Ask'), False, URL('default', 'uploadpage'), []),
+    (T('Browse'),False,None,[
+    (T('Questions'), False, URL('default', 'expert_homepage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
-    (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), []),
+    (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), [])]),
     (T('Search'), False, URL('default', 'search'), [])]
 
 else:
     response.menu = [
-    (T('Questions'), False, URL('default', 'homepage'), []),
     (T('Ask'), False, URL('default', 'uploadpage'), []),
+    (T('Browse'),False,None,[
+    (T('Questions'), False, URL('default', 'homepage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
-    (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), []),
+    (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), [])]),
     (T('Search'), False, URL('default', 'search'), [])]
 
 if auth.has_membership('user_7'):

@@ -16,7 +16,7 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
-    response.flash = T("Helloooo!!")
+  
     return dict(message=T('Welcome to Learn2Cook!'))
 
 @auth.requires_login()
@@ -62,6 +62,9 @@ def show():
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
         usr=db(db.userdata.email==auth.user.email).select().first()
+        new_ans=int(image.no_ans)+1
+        image.no_ans=new_ans
+        image.update_record()
         if usr:
             ans=int(usr.noofans)+1
             usr.noofans=ans
@@ -126,11 +129,11 @@ def myquestions():
        page=int(request.args[0])
     else:
        page=0
-    rows=db(db.question.id>0 and db.question.email==auth.user.email).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    images=db(db.question.id>0 and db.question.email==auth.user.email).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
     backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
     forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
-    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(rows), totalrecs)
-    return dict(rows=rows,backward=backward,forward=forward, nav=nav)
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
+    return dict(images=images,backward=backward,forward=forward, nav=nav)
 
 @auth.requires_login()
 def mystarredquestions():
@@ -143,11 +146,11 @@ def mystarredquestions():
     else:
        page=0
     listofques=db(db.stars.user==auth.user.email)._select(db.stars.question_id)
-    rows=db(db.question.id>0 and db.question.id.belongs(listofques)).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
+    images=db(db.question.id>0 and db.question.id.belongs(listofques)).select(limitby=(page,page+showlines),orderby=~db.question.timestamp)
     backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
     forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
-    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(rows), totalrecs)
-    return dict(rows=rows,backward=backward,forward=forward, nav=nav)
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
+    return dict(images=images,backward=backward,forward=forward, nav=nav)
 
 
 @auth.requires_login()
@@ -176,7 +179,7 @@ def like():
         image.update_record()
         db.likes.insert(question_id=ques.id,ans_id=image.id,liker=auth.user.email,upordown=1)
         
-    return str(image.likes)+" Likes"
+    return str(image.likes)
 
 @auth.requires_login()
 def dislike():
@@ -203,7 +206,7 @@ def dislike():
         image.likes=new_likes
         image.update_record()
         db.likes.insert(question_id=ques.id,ans_id=image.id,liker=auth.user.email,upordown=-1)
-    return str(image.likes)+" Likes"
+    return str(image.likes)
 
 @auth.requires_login()
 def star():
@@ -254,6 +257,7 @@ def reviews():
     form.vars.question_id=image.id
     if form.process().accepted:
         response.flash="Your review is added"
+        redirect(URL('expert_homepage'))
     return dict(form=form)
 
 

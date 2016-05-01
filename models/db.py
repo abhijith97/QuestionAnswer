@@ -140,8 +140,7 @@ db.define_table('answer',
 
 db.define_table('expreview',
                 Field('question_id','reference question'),
-                Field('view','text'),
-                Field('sensible','boolean'))
+                Field('view','text'))
 
 db.define_table('likes',
                Field('question_id','reference question'),

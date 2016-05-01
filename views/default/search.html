@@ -1,23 +1,24 @@
 {{extend 'layout.html'}}
 <style>
-
-.suggestions { background: white; border: solid 1px #55A6C8; }
+body
+    {
+        background-image:url("../../static/images/search.jpeg");
+    }
+.suggestions {border: solid 1px #55A6C8; }
 .suggestions div { padding: 2px 4px 2px 4px; }
 </style>
 
 
-<h1>Search</h1>
-
-
+<h1>Search <span class="glyphicon glyphicon-search"></span></h1>
+<br/>
 <form action="" method="post">
 
-<input name="textbox" type="text" id="tb" onkeyup="autoc1()" list="datalist1" autocomplete="off">
-
 <select name="dropdown" id="dd">
-<option value="Title" selected>Title</option>
+<option value="Title" selected>Tag</option>
 <option value="Description">Description</option>
 <option value="Author">Author</option>
-</select>
+</select>  
+    <input name="textbox" type="text" id="tb" onkeyup="autoc1()" list="datalist1" autocomplete="off">
 <input type="submit" value="Submit" />
 <br><br>
     <datalist id="datalist1">
