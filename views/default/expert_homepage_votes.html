@@ -154,8 +154,22 @@
         background-image:url("../../static/images/1.jpg")
     }
 </style>
-{{=A(BUTTON("Time"),_href=URL("expert_homepage"))}}
-{{=A(BUTTON("Answers"),_href=URL("expert_homepage_votes"))}}
+
+<div>
+    
+    <style scoped>
+     @import url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+    </style>
+
+<div class="container">
+
+  <ul class="nav nav-pills">
+      <li><a href="{{=URL('default','expert_homepage')}}">Recent</a></li>
+           <li class="active"><a data-toggle="pill" href="{{=URL('default','expert_homepage_votes')}}">Answers</a></li>
+</ul>
+</div>
+</div>
+
 {{if len(images):}}
 <div class="container">
   <div class="page-header">

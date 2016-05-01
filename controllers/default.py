@@ -94,6 +94,7 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
+    form.vars.dp=auth.user.dp
 
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
@@ -283,7 +284,6 @@ def dele():
     response.flash="Deleted " 
     return (T("Deleted"))
 #     redirect(URL('default','myrecipes'),client_side=True,extension=False,type='auto')
-
 
 @auth.requires_membership("user_7")
 def manage():

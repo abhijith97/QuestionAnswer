@@ -64,6 +64,7 @@ db1.define_table(
     Field('email', length=128, default='', unique=True), # required
     Field('password', 'password', length=512,readable=False, label='Password'), #required
     Field('phone'),
+    Field('dp', 'upload'),
     Field('registration_key', length=512,                # required
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,              # required
@@ -134,6 +135,7 @@ db.define_table('answer',
    Field('file', 'upload'),
    Field('author'),
    Field('email'),
+   Field('dp', 'upload'),
    Field('body', 'text'),
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
@@ -162,6 +164,10 @@ db.define_table('feed',
                 Field('author'),
                 Field('feedback'))
 
+db.define_table('noti',
+               Field('question_id','reference question'),
+               Field('for'),
+               Field('by'))
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
@@ -177,6 +183,7 @@ db.answer.author.writable =db.answer.author.readable= False
 db.answer.likes.writable = db.answer.likes.readable = False
 db.answer.timestamp.writable = db.answer.timestamp.readable = False
 db.answer.email.writable = db.answer.email.readable = False
+db.answer.dp.writable =db.answer.dp.readable= False
 
 db.expreview.question_id.writable = db.expreview.question_id.readable = False
 
@@ -184,3 +191,6 @@ db.likes.liker.readable=db.likes.liker.writable=False
 
 db.userdata.email.writable=db.userdata.email.readable=False
 db.userdata.noofans.writable=db.userdata.noofans.readable=False
+
+db.feed.author.writable = db.feed.author.readable = False
+db.feed.email.writable = db.feed.email.readable = False

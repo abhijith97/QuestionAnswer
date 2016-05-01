@@ -1,19 +1,27 @@
 {{extend 'layout.html'}}
 <style>
 body
-{
-    background-image:url("../../static/images/7.jpeg");
-}
-</style>
+    {
+        font-family:Sans-serif;
+        color:white;
+        background-image:url("{{=URL('static','images/11.jpg')}}");
+        margin:0;
+     
+    }
+    .back
+    {
+        background-image:url("{{=URL('static','images/7.jpg')}}");
+        background-size:100%;
+    }
 
-<header class="container-fluid background">
+</style>
+<header class="container-fluid back">
       <div class="jumbotron text-center">
         
-        <h1>Ask!</h1>
-          <small>Anything that comes to your mind!</small>
-      
+        <h1 style="color:black">Ask!</h1>
+          
       </div>
     </header>
-
-<h1>Ask a question</h1>
+<br/><br/>
 {{=form}}
+<br><br>

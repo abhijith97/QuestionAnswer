@@ -10,7 +10,7 @@ p5
 I00
 sS'sortable'
 p6
-I6
+I7
 sS'sql'
 p7
 S'TEXT'
@@ -47,7 +47,7 @@ I512
 sg5
 I00
 sg6
-I7
+I8
 sg7
 S'TIMESTAMP'
 p18
@@ -104,7 +104,7 @@ I512
 sg5
 I00
 sg6
-I8
+I9
 sg7
 S'CHAR(512)'
 p36
@@ -162,9 +162,25 @@ sg9
 I00
 sg10
 g15
-ssS'question_id'
+ssS'dp'
 p48
 (dp49
+g4
+I512
+sg5
+I00
+sg6
+I6
+sg7
+S'CHAR(512)'
+p50
+sg9
+I00
+sg10
+g40
+ssS'question_id'
+p51
+(dp52
 g4
 I512
 sg5
@@ -173,10 +189,10 @@ sg6
 I2
 sg7
 S'INTEGER REFERENCES question (id) ON DELETE CASCADE  '
-p50
+p53
 sg9
 I00
 sg10
 S'reference question'
-p51
+p54
 ss.

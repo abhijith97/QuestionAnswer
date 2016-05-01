@@ -1,9 +1,9 @@
 {{extend 'layout.html'}}
+<div>
+      <style scoped>
+     @import url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+    </style>
 
-
-<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 <style>
     html,body
     {
@@ -81,3 +81,4 @@
     </a>
   </div>
 </div>
+    </div>

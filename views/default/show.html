@@ -274,10 +274,12 @@ body {
 <h3>{{=image.body}}</h3>
     </div>
 </div>
-<h3>Asked by: {{=image.author}}</h3>
+<div class="container">
+    <div class="jumbotron">
+        <h3>Asked by: {{=image.author}}</h3>
 {{pass}}
 <small>{{=image.timestamp.date()}}</small>
-
+    </div></div>
 {{if len(views):}}
 
 <div>
@@ -303,7 +305,9 @@ body {
             <li>
                 <div class="comment-main-level">
                     <!-- Avatar -->
-                    <div class="comment-avatar"><img src="https://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt=""></div>
+                   
+                    <div class="comment-avatar"><img src="{{=URL('download', args=posts.dp)}}" alt=""></div>
+                
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">
                         <div class="comment-head">

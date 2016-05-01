@@ -1,6 +1,7 @@
 {{extend 'layout.html'}}
-<style>
+<form><input type="hidden" id="id" name="id" value="" /></form>
 
+<style>
 .timeline {
   list-style: none;
   padding: 20px 0 20px;
@@ -151,7 +152,7 @@
 }
       body
     {
-        background-image:url("../../static/images/2.jpg")
+        background-image:url("../../static/images/2.jpg");
     }
 
 </style>
@@ -212,5 +213,14 @@
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
+    function delt(idno)
+    {
+        var x=confirm("Are you sure?");
+        if(x==true)
+        {       
+            jQuery('#id').val(idno);
+            ajax('{{=URL('default', 'dele')}}', ['id'], 'del');
+        }
+    }
    
 </script>
