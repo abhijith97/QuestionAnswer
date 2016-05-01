@@ -1,9 +1,6 @@
 {{extend 'layout.html'}}
 <style>
-      body
-    {
-        background-image:url("../../static/images/1.jpg")
-    }
+    
 .timeline {
   list-style: none;
   padding: 20px 0 20px;
@@ -152,8 +149,14 @@
 .timeline-body > p + p {
   margin-top: 5px;
 }
+      body
+    {
+        background-image:url("../../static/images/1.jpg")
+    }
 </style>
-{{=A(BUTTON("Search"),_href=URL("search"))}}
+{{=A(BUTTON("Time"),_href=URL("expert_homepage"))}}
+{{=A(BUTTON("Answers"),_href=URL("expert_homepage_votes"))}}
+
 {{if len(images):}}
 <div class="container">
   <div class="page-header">

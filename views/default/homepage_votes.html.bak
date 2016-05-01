@@ -1,6 +1,5 @@
 {{extend 'layout.html'}}
 <style>
-    
 .timeline {
   list-style: none;
   padding: 20px 0 20px;
@@ -154,8 +153,10 @@
         background-image:url("../../static/images/1.jpg")
     }
 </style>
-{{=A(BUTTON("Time"),_href=URL("expert_homepage"))}}
-{{=A(BUTTON("Answers"),_href=URL("expert_homepage_votes"))}}
+
+
+{{=A(BUTTON("Time"),_href=URL("homepage"))}}
+{{=A(BUTTON("Answers"),_href=URL("homepage_votes"))}}
 
 {{if len(images):}}
 <div class="container">
@@ -196,7 +197,6 @@
                 {{pass}}
           <p>{{=image.body}}</p>
         </div>
-          {{=A(BUTTON("Review"), _href=URL("reviews", args=image.id))}}
       </div>
     </li>
 {{pass}}
