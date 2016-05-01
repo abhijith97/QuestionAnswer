@@ -149,9 +149,14 @@
 .timeline-body > p + p {
   margin-top: 5px;
 }
-      body
+    body
     {
-        background-image:url("../../static/images/1.jpg")
+        
+        font-family:Sans-serif;
+        background-image:url("{{=URL('static','images/8.jpg')}}");
+        background-size:100% 100%;
+     
+/*         background-color:antiquewhite; */
     }
 </style>
 
@@ -163,7 +168,7 @@
 
 <div class="container">
 
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills" style="float:right">
       <li><a href="{{=URL('default','expert_homepage')}}">Recent</a></li>
            <li class="active"><a data-toggle="pill" href="{{=URL('default','expert_homepage_votes')}}">Answers</a></li>
 </ul>
@@ -173,7 +178,7 @@
 {{if len(images):}}
 <div class="container">
   <div class="page-header">
-    <h1 id="timeline">Latest Questions</h1>
+    <h1 id="timeline" style="color:white;">Latest Questions</h1>
   </div>
   <ul class="timeline">
       {{num=0}}
@@ -184,13 +189,17 @@
         {{else:}}
         <li class ="timeline-inverted">
             {{pass}}
-      <div data-toggle="tooltip" data-placement="top" title="Click!" class="timeline-badge info">{{=A(num,_href=URL("show",args=image.id))}}</div>
-      <div class="timeline-panel">
+      <div data-toggle="tooltip" data-placement="top" title="Click!" class="timeline-badge primary">{{=A(num,_href=URL("show",args=image.id))}}</div>
+      <div class="timeline-panel" style="background-color:white;">
         <div class="timeline-heading">
           <h4 class="timeline-title">
               {{for i in image.title:}}
               <span>-{{=i}}-</span>
             {{pass}}
+               <div style="float:right;">
+                  
+              
+              <span>Answers <span class="badge primary">{{=image.no_ans}}</span></span></div>
             </h4>
           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{=image.timestamp.date()}}</small>
               <small class="text-muted">By 
@@ -214,6 +223,13 @@
     </li>
 {{pass}}
   </ul>
+</div>
+<div style="color:white;">
+     <ul class="pager">
+         <li>{{=backward}}</li>
+         <li>{{=forward}}</li>
+         <li>{{=nav}}</li>
+    </ul>
 </div>
 {{else:}}
     <h1>No Questions uploaded yet!!</h1>

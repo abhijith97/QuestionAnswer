@@ -94,6 +94,7 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
+    form.vars.dp=auth.user.dp
 
     if form.process().accepted:
         response.flash = 'Your answer is posted!'
@@ -115,12 +116,11 @@ def show():
             db.userdata.insert(email=auth.user.email,noofans=1,badge="Newbie")
             
     usr=db(db.userdata.id>0).select()
-    usertable=db1(db1.auth_user.id>0).select()
     commentss = db(db.answer.question_id==image.id).select()
     views=db(db.expreview.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
     starss=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).select()
-    return dict(image=image, commentss=commentss, likess=likess, starss=starss, views=views, usr=usr, usertable=usertable, form=form)
+    return dict(image=image, commentss=commentss, likess=likess, starss=starss, views=views, usr=usr, form=form)
 
 @auth.requires_login()
 def uploadpage():
@@ -202,6 +202,11 @@ def feedback():
     return dict(form=form)
 
 @auth.requires_login()
+def noti():
+    rows=db(db.stars.author==auth.user.email).select()
+    return dict(rows=rows)
+
+@auth.requires_login()
 def like():
     image = db(db.answer.id==request.vars.id).select().first()
     ques=db(db.question.id==image.question_id).select().first()
@@ -262,7 +267,7 @@ def star():
     image = db(db.question.id==request.vars.id).select().first()
     starred=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).count()
     if starred==0:
-        db.stars.insert(question_id=image.id,user=auth.user.email)
+        db.stars.insert(question_id=image.id,user=auth.user.email,username=auth.user.firstname,author=image.email)
         response.flash="Starred"
     else:
         response.flash="Unstarred"

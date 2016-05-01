@@ -157,13 +157,14 @@ db.define_table('userdata',
 
 db.define_table('stars',
                 Field('question_id','reference question'),
-                Field('user'))
+                Field('user'),
+                Field('username'),
+                Field('author'))
 
 db.define_table('feed',
                 Field('email'),
                 Field('author'),
                 Field('feedback'))
-
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()

@@ -221,6 +221,13 @@
 {{pass}}
   </ul>
 </div>
+<div style="color:white;">
+     <ul class="pager">
+         <li>{{=backward}}</li>
+         <li>{{=forward}}</li>
+         <li>{{=nav}}</li>
+    </ul>
+</div>
 {{else:}}
     <h1>No Questions uploaded yet!!</h1>
 {{pass}}

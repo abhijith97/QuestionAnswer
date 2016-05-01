@@ -150,9 +150,14 @@
 .timeline-body > p + p {
   margin-top: 5px;
 }
-      body
+     body
     {
-        background-image:url("../../static/images/2.jpg");
+        
+        font-family:Sans-serif;
+        background-image:url("{{=URL('static','images/8.jpg')}}");
+        background-size:100% 100%;
+     
+/*         background-color:antiquewhite; */
     }
 
 </style>
@@ -160,7 +165,7 @@
 {{if len(images):}}
 <div class="container">
   <div class="page-header">
-    <h1 id="timeline">My Questions</h1>
+    <h1 id="timeline" style="color:white;">My Questions</h1>
   </div>
   <ul class="timeline">
       {{num=0}}
@@ -171,8 +176,8 @@
         {{else:}}
         <li class ="timeline-inverted">
             {{pass}}
-      <div data-toggle="tooltip" data-placement="top" title="Click!" class="timeline-badge info">{{=A(num,_href=URL("show",args=image.id))}}</div>
-      <div class="timeline-panel">
+      <div data-toggle="tooltip" data-placement="top" title="Click!" class="timeline-badge primary">{{=A(num,_href=URL("show",args=image.id))}}</div>
+      <div class="timeline-panel" style="background-color:white;">
         <div class="timeline-heading">
           <h4 class="timeline-title">
               {{for i in image.title:}}
@@ -203,8 +208,15 @@
 {{pass}}
   </ul>
 </div>
+<div style="color:white;">
+     <ul class="pager">
+         <li>{{=backward}}</li>
+         <li>{{=forward}}</li>
+         <li>{{=nav}}</li>
+    </ul>
+</div>
 {{else:}}
-    <h1>No Questions uploaded yet!!</h1>
+    <h1>No Questions uploaded by you yet!!</h1>
 {{pass}}
 
 
@@ -224,3 +236,4 @@
     }
    
 </script>
+{{include 'web2py_ajax.html'}}

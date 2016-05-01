@@ -202,6 +202,11 @@ def feedback():
     return dict(form=form)
 
 @auth.requires_login()
+def noti():
+    rows=db(db.stars.author==auth.user.email).select()
+    return dict(rows=rows)
+
+@auth.requires_login()
 def like():
     image = db(db.answer.id==request.vars.id).select().first()
     ques=db(db.question.id==image.question_id).select().first()
@@ -262,7 +267,7 @@ def star():
     image = db(db.question.id==request.vars.id).select().first()
     starred=db((db.stars.question_id==image.id) & (db.stars.user==auth.user.email)).count()
     if starred==0:
-        db.stars.insert(question_id=image.id,user=auth.user.email)
+        db.stars.insert(question_id=image.id,user=auth.user.email,username=auth.user.first_name,author=image.email)
         response.flash="Starred"
     else:
         response.flash="Unstarred"

@@ -151,7 +151,12 @@
 }
       body
     {
-        background-image:url("../../static/images/3.jpg")
+        
+        font-family:Sans-serif;
+        background-image:url("{{=URL('static','images/8.jpg')}}");
+        background-size:100% 100%;
+     
+/*         background-color:antiquewhite; */
     }
 
 </style>
@@ -159,7 +164,7 @@
 {{if len(images):}}
 <div class="container">
   <div class="page-header">
-    <h1 id="timeline">My Favourite Questions</h1>
+    <h1 id="timeline" style="color:white;">My Favourite Questions</h1>
   </div>
   <ul class="timeline">
       {{num=0}}
@@ -170,13 +175,17 @@
         {{else:}}
         <li class ="timeline-inverted">
             {{pass}}
-      <div data-toggle="tooltip" data-placement="top" title="Click!" class="timeline-badge info">{{=A(num,_href=URL("show",args=image.id))}}</div>
-      <div class="timeline-panel">
+      <div data-toggle="tooltip" data-placement="top" title="Click!" class="timeline-badge primary">{{=A(num,_href=URL("show",args=image.id))}}</div>
+      <div class="timeline-panel" style="background-color:white;">
         <div class="timeline-heading">
           <h4 class="timeline-title">
               {{for i in image.title:}}
               <span>-{{=i}}-</span>
             {{pass}}
+               <div style="float:right;">
+                  
+              
+              <span>Answers <span class="badge primary">{{=image.no_ans}}</span></span></div>
             </h4>
           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{=image.timestamp.date()}}</small>
               <small class="text-muted">By 
@@ -200,8 +209,15 @@
 {{pass}}
   </ul>
 </div>
+<div style="color:white;">
+     <ul class="pager">
+         <li>{{=backward}}</li>
+         <li>{{=forward}}</li>
+         <li>{{=nav}}</li>
+    </ul>
+</div>
 {{else:}}
-    <h1>No Questions uploaded yet!!</h1>
+    <h1>No Questions starred yet!!</h1>
 {{pass}}
 
 

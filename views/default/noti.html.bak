@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+
+<ul>
+    {{for noti in rows:}}
+    <li>{{=noti.user}} starred your {{=A("question",_href=URL("show",args=noti.question_id))}}</li>
+    {{pass}}
+</ul>
