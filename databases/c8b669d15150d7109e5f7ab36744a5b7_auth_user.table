@@ -38,7 +38,7 @@ sg9
 I00
 sg10
 g11
-ssS'phone'
+ssS'reset_password_key'
 p15
 (dp16
 g4
@@ -46,7 +46,7 @@ I512
 sg5
 I00
 sg6
-I6
+I8
 sg7
 S'CHAR(512)'
 p17
@@ -125,7 +125,7 @@ sg9
 I00
 sg10
 g11
-ssS'reset_password_key'
+ssS'phone'
 p37
 (dp38
 g4
@@ -133,7 +133,7 @@ I512
 sg5
 I00
 sg6
-I8
+I6
 sg7
 S'CHAR(512)'
 p39
