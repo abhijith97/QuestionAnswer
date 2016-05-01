@@ -319,24 +319,31 @@ def autoc():
     tit=str(text)+'%';
     
     if(type=="Title"):
-        images=db(db.question.title.like(tit, case_sensitive=False)).select(distinct=True)
-#         if(len(images)==0):
-#             images=["Abhi"]
-        a=["<option value="+image.title+">" for image in images]
+        q=0;
+
+      
+        
+        
     elif(type=="Description"):
 
         images=db(db.question.body.like(tit, case_sensitive=False)).select(distinct=True)
 #         if(len(images)==0):
 #             images=["Abhi"]
-        a=["<option value="+image.body+">" for image in images]
+        a=["<option value=\""+str(image.body)+"\">" for image in images]
     else:
         images=db(db.question.author.like(tit, case_sensitive=False)).select(distinct=True)
 #         if(len(images)==0):
 #             images=["Abhi"]
-        a=["<option value=\""+image.author+"\">" for image in images]
+        a=["<option value=\""+str(image.author)+"\">" for image in images]
     if(len(a)==0):
         a=""
     return a
+
+
+        
+            
+    return dict(b=b)
+    
 
 def user():
     """

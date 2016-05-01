@@ -30,6 +30,7 @@ if auth.has_membership('Expert'):
     (T('Questions'), False, URL('default', 'expert_homepage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
     (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), [])]),
+    (T('Tags'), False, URL('default', 'tags'), []),
     (T('Search'), False, URL('default', 'search'), []),
     (T('Feedback'), False, URL('default', 'feedback'), []),
     (T('Notifications'), False, URL('default', 'noti'), [])]
@@ -41,8 +42,10 @@ else:
     (T('Questions'), False, URL('default', 'homepage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
     (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), [])]),
+    (T('Tags'), False, URL('default', 'tags'), []),
     (T('Search'), False, URL('default', 'search'), []),
-    (T('Feedback'), False, URL('default', 'feedback'), [])]
+    (T('Feedback'), False, URL('default', 'feedback'), []),
+    (T('Notifications'), False, URL('default', 'noti'), [])]
 
 if auth.has_membership('user_7'):
     response.menu.append((T('Admin Space'),False,None,[

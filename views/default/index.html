@@ -1,5 +1,4 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 {{extend 'layout.html'}}
 <div>
       <style scoped>
@@ -18,15 +17,16 @@
   }
   </style>
 
-<div class="container" style="width:100%; height:100%">
+<div class="container" style="width:100%;">
   <br>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:100%;">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="">
     <!-- Indicators -->
-    <ol class="carousel-indicators" style="height:100%;">
+    <ol class="carousel-indicators" style="">
       <li data-target="#myCarousel" data-slide-to="0" class="active" ></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3" ></li>
+        <li data-target="#myCarousel" data-slide-to="4" ></li>
     </ol>
 
     <!-- Wrapper for slides -->
@@ -66,7 +66,7 @@
   <div class="item">
         <img src="{{=URL('static','images/5.jpg')}}" alt="5" >
         <div class="carousel-caption">
-          <h3>Search</h3>
+          <h3>{{=A("Search",_href=URL("search"))}}</h3>
           <p>Search questions based on the tags,the question and the author!</p>
         </div>
       </div>
