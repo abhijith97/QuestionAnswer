@@ -1,7 +1,21 @@
 {{extend 'layout.html'}}
+<style>
+body
+    {
+        font-family:Sans-serif;
+        background-image:url("{{=URL('static','images/11.jpg')}}");
 
-<ul>
+    }
+</style>
+{{if len(rows):}}
+<div class="container">
+<h4>
+    
+<ul class="list-group" style="list-style-type:none; color:brown;">
     {{for noti in rows:}}
-    <li>{{=noti.username}} starred your {{=A("question",_href=URL("show",args=noti.question_id))}}</li>
+    <li class="list-group-item">{{=noti.username}} starred your {{=A("question",_href=URL("show",args=noti.question_id))}}</li>
     {{pass}}
-</ul>
+    </ul></h4></div>
+{{else:}}
+No notifications!
+{{pass}}

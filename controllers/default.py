@@ -285,8 +285,8 @@ def edit():
     
 @auth.requires_login()
 def dele():
-    remove = db(db.question.id==request.vars.id).delete()
-    response.flash="Deleted " 
+    db(db.question.id==request.vars.id).delete()
+    response.flash="Deleted. Please refresh the page to see the results " 
     return (T("Deleted"))
 #     redirect(URL('default','myrecipes'),client_side=True,extension=False,type='auto')
 
