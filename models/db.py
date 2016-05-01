@@ -157,6 +157,10 @@ db.define_table('stars',
                 Field('question_id','reference question'),
                 Field('user'))
 
+db.define_table('feed',
+                Field('email'),
+                Field('author'),
+                Field('feedback'))
 
 db.question.id.readable=db.question.id.writable=False
 db.question.body.requires = IS_NOT_EMPTY()
@@ -179,3 +183,6 @@ db.likes.liker.readable=db.likes.liker.writable=False
 
 db.userdata.email.writable=db.userdata.email.readable=False
 db.userdata.noofans.writable=db.userdata.noofans.readable=False
+
+db.feed.author.writable = db.feed.author.readable = False
+db.feed.email.writable = db.feed.email.readable = False

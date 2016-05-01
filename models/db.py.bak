@@ -140,8 +140,7 @@ db.define_table('answer',
 
 db.define_table('expreview',
                 Field('question_id','reference question'),
-                Field('view','text'),
-                Field('sensible','boolean'))
+                Field('view','text'))
 
 db.define_table('likes',
                Field('question_id','reference question'),
@@ -157,6 +156,11 @@ db.define_table('userdata',
 db.define_table('stars',
                 Field('question_id','reference question'),
                 Field('user'))
+
+db.define_table('feed',
+                Field('email'),
+                Field('author'),
+                Field('feedback'))
 
 
 db.question.id.readable=db.question.id.writable=False

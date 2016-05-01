@@ -129,9 +129,7 @@ body {
     display: block;
     clear: both;
 }
-/**
- * Caja del Comentario
- ---------------------------*/
+
 .comments-list .comment-box {
     width: 680px;
     float: right;
@@ -230,9 +228,6 @@ body {
     border-radius: 3px;
 }
 
-/** =====================
- * Responsive
- ========================*/
 @media only screen and (max-width: 766px) {
     .comments-container {
         width: 480px;
@@ -313,14 +308,18 @@ body {
                     <div class="comment-box">
                         <div class="comment-head">
                             <h6 class="comment-name">{{=posts.author}} 
-                                {{if usr.badge=="Gold":}}
+                               {{for users in usr:}}
+                                {{if posts.email==users.email:}}
+                                {{if users.badge=="Gold":}}
                                     <img style="width:20px" src="../../static/images/gold.jpeg"/>
-                                {{elif usr.badge=="Silver":}}
+                                {{elif users.badge=="Silver":}}
                                     <img style="width:20px" src="../../static/images/silver.jpeg"/>
-                                {{elif usr.badge=="Bronze":}}
+                                {{elif users.badge=="Bronze":}}
                                     <img style="width:20px" src="../../static/images/bronze.jpeg"/>
                                 {{else:}}
                                     <img style="width:20px" src="../../static/images/newbie.jpeg"/>
+                                {{pass}}
+                                {{pass}}
                                 {{pass}}
                             </h6>
                         </div>

@@ -30,7 +30,8 @@ if auth.has_membership('Expert'):
     (T('Questions'), False, URL('default', 'expert_homepage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
     (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), [])]),
-    (T('Search'), False, URL('default', 'search'), [])]
+    (T('Search'), False, URL('default', 'search'), []),
+    (T('Feedback'), False, URL('default', 'feedback'), [])]
 
 else:
     response.menu = [
@@ -39,11 +40,13 @@ else:
     (T('Questions'), False, URL('default', 'homepage'), []),
     (T('My Questions'), False, URL('default', 'myquestions'), []),
     (T('My Starred Questions'), False, URL('default', 'mystarredquestions'), [])]),
-    (T('Search'), False, URL('default', 'search'), [])]
+    (T('Search'), False, URL('default', 'search'), []),
+    (T('Feedback'), False, URL('default', 'feedback'), [])]
 
 if auth.has_membership('user_7'):
-    response.menu.append((T('Manage Questions'),False,URL('default','managequestions'),[]))
-    response.menu.append((T('Manage Users'),False,URL('default','manage'),[]))
+    response.menu.append((T('Admin Space'),False,None,[
+    (T('Manage Questions'), False, URL('default', 'managequestions'), []),
+    (T('Manage Users'), False, URL('default', 'manage'), [])]))
     
 DEVELOPMENT_MENU = False
 

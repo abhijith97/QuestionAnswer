@@ -78,7 +78,7 @@ def show():
         else:
             db.userdata.insert(email=auth.user.email,noofans=1,badge="Newbie")
             
-    usr=db(db.userdata.email==auth.user.email).select().first()
+    usr=db(db.userdata.id>0).select()
     commentss = db(db.answer.question_id==image.id).select()
     views=db(db.expreview.question_id==image.id).select()
     likess=db((db.likes.question_id==image.id) & (db.likes.liker==auth.user.email)).select()
@@ -152,6 +152,17 @@ def mystarredquestions():
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
     return dict(images=images,backward=backward,forward=forward, nav=nav)
 
+@auth.requires_login()
+def feedback():
+    form=SQLFORM(db.feed)
+    form.vars.author=auth.user.first_name
+    form.vars.email=auth.user.email
+    form.add_button('Back', URL('homepage'))
+    
+    if form.process().accepted:
+        response.flash="Your feedback is posted!"
+        redirect(URL('default','homepage'))
+    return dict(form=form)
 
 @auth.requires_login()
 def like():

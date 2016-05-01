@@ -28,6 +28,7 @@ ul {
 body {
     font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
     background-image:url("../../static/images/pp.jpg");
+    background-size:100% 100%;
 }
 
 /** ====================
@@ -312,14 +313,18 @@ body {
                     <div class="comment-box">
                         <div class="comment-head">
                             <h6 class="comment-name">{{=posts.author}} 
-                                {{if usr.badge=="Gold":}}
+                               {{for users in commentors:}}
+                                {{if posts.email==users.email:}}
+                                {{if users.badge=="Gold":}}
                                     <img style="width:20px" src="../../static/images/gold.jpeg"/>
-                                {{elif usr.badge=="Silver":}}
+                                {{elif users.badge=="Silver":}}
                                     <img style="width:20px" src="../../static/images/silver.jpeg"/>
-                                {{elif usr.badge=="Bronze":}}
+                                {{elif users.badge=="Bronze":}}
                                     <img style="width:20px" src="../../static/images/bronze.jpeg"/>
                                 {{else:}}
                                     <img style="width:20px" src="../../static/images/newbie.jpeg"/>
+                                {{pass}}
+                                {{pass}}
                                 {{pass}}
                             </h6>
                         </div>
