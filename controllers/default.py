@@ -34,6 +34,8 @@ def homepage():
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
     return dict(images=images,backward=backward,forward=forward, nav=nav)
 
+
+
 @auth.requires_membership('Expert')
 def expert_homepage():
     totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
@@ -48,6 +50,40 @@ def expert_homepage():
     forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
     nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
     return dict(images=images,backward=backward,forward=forward, nav=nav)
+
+
+@auth.requires_login()
+def homepage_votes():
+    totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
+    showlines = 25    # number of records per page
+    if len(request.args):
+       page=int(request.args[0])
+    else:
+       page=0
+    images=db(db.question.id>0).select(limitby=(page,page+showlines),orderby=~db.question.no_ans)
+    
+    backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
+    forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
+    return dict(images=images,backward=backward,forward=forward, nav=nav)
+
+
+
+@auth.requires_membership('Expert')
+def expert_homepage_votes():
+    totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
+    showlines = 25    # number of records per page
+    if len(request.args):
+       page=int(request.args[0])
+    else:
+       page=0
+    images=db(db.question.id>0).select(limitby=(page,page+showlines),orderby=~db.question.no_ans)
+    
+    backward=A('<< previous',_href=URL(r=request,args=[page-showlines])) if page else '<< previous'
+    forward=A('next >>',_href=URL(r=request,args=[page+showlines])) if totalrecs>page+showlines else 'next >>'
+    nav= "Showing %d to %d out of %d records"  % (page+1, page+len(images), totalrecs)
+    return dict(images=images,backward=backward,forward=forward, nav=nav)
+
 
 @auth.requires_login()   
 def show():

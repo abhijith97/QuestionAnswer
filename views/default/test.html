@@ -1,6 +1,3 @@
-{{extend 'layout.html'}}
-
-
 <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
@@ -11,12 +8,12 @@
     }
   .carousel-inner > .item > img, .carousel-inner > .item > a > img
     {
-      width: 60%;
+      width: 70%;
       margin: auto;
   }
   </style>
 
-<div class="container" style="width:100%; height:100%">
+<div class="container" style="height:700px;">
   <br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:100%;">
     <!-- Indicators -->
@@ -31,7 +28,7 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-        <img src="{{=URL('static','images/1.jpg')}}" alt="1">
+        <img src="../../static/images/1.jpg" alt="1" width="90%" height="50%">
         <div class="carousel-caption">
           <h3>{{=A("ASK!",_href=URL("uploadpage"))}}</h3>
           <p>Ask your heart out! You can even be anonymous here. So grab the opportunity!</p>
@@ -39,7 +36,7 @@
       </div>
 
       <div class="item">
-        <img src="{{=URL('static','images/2.jpg')}}" alt="2">
+        <img src="../../static/images/1.jpg" alt="2">
         <div class="carousel-caption">
           <h3>{{=A("READ!",_href=URL("homepage"))}}</h3>
           <p>Read others' questions and the answers!</p>
@@ -47,7 +44,7 @@
       </div>
     
       <div class="item">
-        <img src="{{=URL('static','images/3.jpg')}}" alt="3">
+        <img src="../../static/images/1.jpg" alt="3" width="460" height="345">
         <div class="carousel-caption">
           <h3>{{=A("My Questions!",_href=URL("myquestions"))}}</h3>
           <p>Your asked questions!</p>
@@ -55,14 +52,14 @@
       </div>
 
       <div class="item">
-        <img src="{{=URL('static','images/4.jpg')}}" alt="4">
+        <img src="../../static/images/1.jpg" alt="4" width="460" height="345">
         <div class="carousel-caption">
           <h3>{{=A("Favourites!",_href=URL("mystarredquestions"))}}</h3>
           <p>Your own favourite questions!</p>
         </div>
       </div>
   <div class="item">
-        <img src="{{=URL('static','images/5.jpg')}}" alt="5" >
+        <img src="../../static/images/1.jpg" alt="5" width="460" height="345">
         <div class="carousel-caption">
           <h3>Search</h3>
           <p>Search questions based on the tags,the question and the author!</p>

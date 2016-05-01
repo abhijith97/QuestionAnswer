@@ -148,8 +148,14 @@
 .timeline-body > p + p {
   margin-top: 5px;
 }
+      body
+    {
+        background-image:url("../../static/images/1.jpg")
+    }
 </style>
-{{=A(BUTTON("Search"),_href=URL("search"))}}
+{{=A(BUTTON("Time"),_href=URL("homepage"))}}
+{{=A(BUTTON("Answers"),_href=URL("homepage_votes"))}}
+
 {{if len(images):}}
 <div class="container">
   <div class="page-header">

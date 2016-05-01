@@ -156,7 +156,6 @@
 </style>
 {{=A(BUTTON("Time"),_href=URL("expert_homepage"))}}
 {{=A(BUTTON("Answers"),_href=URL("expert_homepage_votes"))}}
-
 {{if len(images):}}
 <div class="container">
   <div class="page-header">
