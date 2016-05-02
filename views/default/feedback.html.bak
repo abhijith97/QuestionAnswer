@@ -3,6 +3,7 @@
 body
     {
         background-image:url("{{=URL('static','images/14.jpg')}}");
+                background-size:100%;
     }
     .back
     {

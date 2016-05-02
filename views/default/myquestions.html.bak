@@ -206,8 +206,8 @@
           <p>{{=image.body}}</p>
         </div>
           {{=A(BUTTON("Edit"), _href=URL("edit", args=image.id))}}
-          <button class="btn btn-primary" name="{{=image.id}}" onclick="delt({{=image.id}})"><div id="{{=image.id}}">Delete</div></button></div></td>
-      
+          <button class="btn btn-primary" onclick="delt('{{=image.id}}')"><div id="{{=image.id}}">Delete</div></button></td>
+      </div>
     </li>
 {{pass}}
   </ul>

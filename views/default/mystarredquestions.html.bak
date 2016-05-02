@@ -182,6 +182,10 @@
               {{for i in image.title:}}
               <span>-{{=i}}-</span>
             {{pass}}
+               <div style="float:right;">
+                  
+              
+              <span>Answers <span class="badge primary">{{=image.no_ans}}</span></span></div>
             </h4>
           <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{=image.timestamp.date()}}</small>
               <small class="text-muted">By 

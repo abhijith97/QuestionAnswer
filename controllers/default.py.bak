@@ -124,7 +124,7 @@ def show():
 
 @auth.requires_login()
 def uploadpage():
-    form=SQLFORM(db.question)
+    form=SQLFORM(db.question,labels={"title":"Tags"})
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.add_button('Back', URL('homepage'))
@@ -133,7 +133,6 @@ def uploadpage():
         response.flash="Your question is posted!"
         redirect(URL('default','homepage'))
     return dict(form=form)
-
 
 @auth.requires_login()
 def search():
@@ -203,8 +202,10 @@ def feedback():
 
 @auth.requires_login()
 def noti():
-    rows=db(db.stars.author==auth.user.email).select()
-    return dict(rows=rows)
+
+    rows1=db(db.stars.author==auth.user.email).select()
+   
+    return dict(rows1=rows1)
 
 @auth.requires_login()
 def like():
@@ -302,16 +303,14 @@ def managequestions():
     
 
 def reviews():
-    response.flash="Hello"
 #     response.flash=BEAUTIFY(request.vars.id)
     image = db.question(request.args(0,cast=int)) or redirect(URL('index'))
-    form=SQLFORM(db.expreview)
+    form=SQLFORM(db.expreview,labels={"view":"Review"})
     form.vars.question_id=image.id
     if form.process().accepted:
         response.flash="Your review is added"
         redirect(URL('expert_homepage'))
     return dict(form=form)
-
 
 def autoc():
     text=request.post_vars.text
@@ -321,9 +320,6 @@ def autoc():
     if(type=="Title"):
         q=0;
 
-      
-        
-        
     elif(type=="Description"):
 
         images=db(db.question.body.like(tit, case_sensitive=False)).select(distinct=True)
@@ -338,16 +334,7 @@ def autoc():
     if(len(a)==0):
         a=""
     return a
-
-def tags():
-    ab=[]
-    images=db(db.question.id>0).select(db.question.title)
-    for titles in images:
-#         for t in titles:
-        b=titles.split("|")
-        ab.join(b)
-        
-            
+       
     return dict(b=b)
     
 
@@ -368,7 +355,6 @@ def user():
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
     return dict(form=auth())
-
 
 @cache.action()
 def download():

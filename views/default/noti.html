@@ -7,12 +7,12 @@ body
 
     }
 </style>
-{{if len(rows):}}
+{{if len(rows1):}}
 <div class="container">
 <h4>
     
 <ul class="list-group" style="list-style-type:none; color:brown;">
-    {{for noti in rows:}}
+    {{for noti in rows1:}}
     <li class="list-group-item">{{=noti.username}} starred your {{=A("question",_href=URL("show",args=noti.question_id))}}</li>
     {{pass}}
     </ul></h4></div>
