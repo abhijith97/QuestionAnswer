@@ -133,9 +133,10 @@ db.define_table('question',
 db.define_table('answer',
    Field('question_id', 'reference question'),
    Field('file', 'upload'),
+   Field('asker'),
    Field('author'),
    Field('email'),
-   Field('dp', 'upload'),
+   Field('dp'),
    Field('body', 'text'),
    Field('timestamp','datetime',default=request.now),
    Field('likes'))
@@ -159,7 +160,8 @@ db.define_table('stars',
                 Field('question_id','reference question'),
                 Field('user'),
                 Field('username'),
-                Field('author'))
+                Field('author'),
+                Field('timestamp','datetime',default=request.now))
 
 db.define_table('feed',
                 Field('email'),
@@ -177,9 +179,10 @@ db.question.no_ans.writable = db.question.no_ans.readable = False
 db.answer.body.requires = IS_NOT_EMPTY()
 db.answer.question_id.writable = db.answer.question_id.readable = False
 db.answer.author.writable =db.answer.author.readable= False
+db.answer.email.writable = db.answer.email.readable = False
+db.answer.asker.writable=db.answer.asker.readable=False
 db.answer.likes.writable = db.answer.likes.readable = False
 db.answer.timestamp.writable = db.answer.timestamp.readable = False
-db.answer.email.writable = db.answer.email.readable = False
 db.answer.dp.writable =db.answer.dp.readable= False
 
 db.expreview.question_id.writable = db.expreview.question_id.readable = False

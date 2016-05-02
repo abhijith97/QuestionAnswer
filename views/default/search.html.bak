@@ -21,7 +21,7 @@ body
 <option value="Description">Description</option>
 <option value="Author">Author</option>
 </select>  
-    <input name="textbox" type="text" id="tb" onchange="autoc1()" list="datalist1" autocomplete="off">
+    <input name="textbox" type="text" id="tb" oninput="autoc1()" list="datalist1" autocomplete="off">
 <input type="submit" value="Submit" />
 <br><br>
     <datalist id="datalist1">
@@ -74,15 +74,11 @@ body
 //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function() {
-
-
 						    	    if(xhr.readyState == 4 && xhr.status == 200) {
 								    		    var return_data = xhr.responseText;
 										    	document.getElementById("datalist1").innerHTML = return_data;
                                         }
     };
-    
-
     xhr.send(val);
     
     };

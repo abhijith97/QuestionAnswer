@@ -300,14 +300,14 @@ Anonymous
 
 {{if len(commentss):}}
 <div class="comments-container">
-        <h1>Answers</h1>
+        <h1 style="color:white">Answers</h1>
         <ul id="comments-list" class="comments-list">
                       {{for posts in commentss:}}
             <li>
                 <div class="comment-main-level">
                     <!-- Avatar -->
                    
-                    <div class="comment-avatar"><img src="{{=URL('download', args=posts.dp)}}" alt=""></div>
+                    <div class="comment-avatar"><img src="person.gif" alt=""></div>
                 
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">

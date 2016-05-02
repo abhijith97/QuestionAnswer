@@ -21,3 +21,9 @@ body
     </header>
 <br><br>
 {{=form}}
+
+{{for post in posts:}}
+<ul  style="list-style-type:none;">
+    <li class="alert alert-warning">{{=post.author}} : {{=post.feedback}}</li>
+</ul>
+{{pass}}

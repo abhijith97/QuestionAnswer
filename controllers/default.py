@@ -22,7 +22,7 @@ def index():
 @auth.requires_login()
 def homepage():
     totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
-    showlines = 25    # number of records per page
+    showlines = 5    # number of records per page
     if len(request.args):
        page=int(request.args[0])
     else:
@@ -39,7 +39,7 @@ def homepage():
 @auth.requires_membership('Expert')
 def expert_homepage():
     totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
-    showlines = 25    # number of records per page
+    showlines = 5    # number of records per page
     if len(request.args):
        page=int(request.args[0])
     else:
@@ -55,7 +55,7 @@ def expert_homepage():
 @auth.requires_login()
 def homepage_votes():
     totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
-    showlines = 25    # number of records per page
+    showlines = 5    # number of records per page
     if len(request.args):
        page=int(request.args[0])
     else:
@@ -72,7 +72,7 @@ def homepage_votes():
 @auth.requires_membership('Expert')
 def expert_homepage_votes():
     totalrecs = db(db.question.id>0).count()  # number of records in table (for example)
-    showlines = 25    # number of records per page
+    showlines = 5    # number of records per page
     if len(request.args):
        page=int(request.args[0])
     else:
@@ -94,6 +94,7 @@ def show():
     form.vars.author=auth.user.first_name
     form.vars.email=auth.user.email
     form.vars.likes=0
+    form.vars.asker=image.email
     form.vars.dp=auth.user.dp
 
     if form.process().accepted:
@@ -196,15 +197,17 @@ def feedback():
     
     if form.process().accepted:
         response.flash="Your feedback is posted!"
-        redirect(URL('default','homepage'))
-    return dict(form=form)
+        redirect(URL('default','index'))
+        
+    posts=db(db.feed.id>0).select()
+    return dict(form=form,posts=posts)
 
 @auth.requires_login()
 def noti():
 
-    rows1=db(db.stars.author==auth.user.email).select()
-   
-    return dict(rows1=rows1)
+    rows1=db(db.stars.author==auth.user.email).select(orderby=~db.stars.timestamp)
+    rows2=db(db.answer.asker==auth.user.email).select(orderby=~db.answer.timestamp)
+    return dict(rows1=rows1,rows2=rows2)
 
 @auth.requires_login()
 def like():
@@ -313,13 +316,13 @@ def reviews():
 
 def autoc():
     text=request.post_vars.text
-    type=request.post_vars.type
+    typea=request.post_vars.type
     tit=str(text)+'%';
     
-    if(type=="Title"):
+    if(typea=="Title"):
         q=0;
 
-    elif(type=="Description"):
+    elif(typea=="Description"):
 
         images=db(db.question.body.like(tit, case_sensitive=False)).select(distinct=True)
 #         if(len(images)==0):
